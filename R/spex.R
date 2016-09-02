@@ -19,7 +19,6 @@
 #' @param ... arguments for methods
 #' @param crs a projection string
 #' @importFrom methods as
-#' @importMethodsFrom raster as
 #' @importFrom raster crs<- crs extent
 #' @importFrom sp SpatialPolygonsDataFrame
 #' @importFrom stats setNames
@@ -79,5 +78,5 @@ spex.default <- function(x, byid = FALSE, .id, ...) {
 spex.Extent <- function(x, crs, ...) {
   p <- as(extent(x), 'SpatialPolygons')
   crs(p) <- crs
-  p
+  spex(p, ...)
 }
