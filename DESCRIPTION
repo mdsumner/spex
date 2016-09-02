@@ -18,3 +18,4 @@ Imports:
 RoxygenNote: 5.0.1
 URL: https://github.com/mdsumner/spex
 BugReports: https://github.com/mdsumner/spex/issues
+Suggests: covr
