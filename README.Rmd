@@ -1,0 +1,43 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+## spex
+
+Spatial extent with projection metadata. 
+
+Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood
+by the 'raster' package function 'extent()'. If the input has projection metadata it
+will be carried through to the output. 
+
+There is also a method to put an extent and a crs together. 
+
+## Examples
+
+```{r}
+library(spex)
+library(raster)
+data(lux)
+(exlux <- spex(lux))
+
+plot(lux)
+plot(exlux, add = TRUE)
+title(projection(exlux), cex.main = 0.7)
+## put an extent and a CRS together
+spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
+```
+
+
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
