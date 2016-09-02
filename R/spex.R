@@ -16,9 +16,13 @@
 #' @param x any object with a \code{\link[raster]{Extent}}
 #' @param byid return a separate object for every input sub-object (not yet implemented)
 #' @param .id optional name for output attribute name
+#' @param ... arguments for methods
 #' @param crs a projection string
-#' @importFrom raster crs extent
+#' @importFrom methods as
+#' @importMethodsFrom raster as
+#' @importFrom raster crs<- crs extent
 #' @importFrom sp SpatialPolygonsDataFrame
+#' @importFrom stats setNames
 #' @return 'SpatialPolygonsDataFrame'
 #' @section Warning: Please note that an extent converted to polygons consists
 #' of only four unique coordinates, and so this is not necessarily suited for

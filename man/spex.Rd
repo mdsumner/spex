@@ -17,6 +17,8 @@ spex(x, ...)
 \arguments{
 \item{x}{any object with a \code{\link[raster]{Extent}}}
 
+\item{...}{arguments for methods}
+
 \item{byid}{return a separate object for every input sub-object (not yet implemented)}
 
 \item{.id}{optional name for output attribute name}
