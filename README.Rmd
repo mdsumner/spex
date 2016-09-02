@@ -27,6 +27,14 @@ will be carried through to the output.
 
 There is also a method to put an extent and a crs together. 
 
+## Installation
+
+Install 'spex' from CRAN. 
+
+```{r,eval=FALSE}
+install.packages("spex")
+```
+
 ## Examples
 
 ```{r}
@@ -35,13 +43,15 @@ library(raster)
 data(lux)
 (exlux <- spex(lux))
 
-plot(lux)
-plot(exlux, add = TRUE)
-title(projection(exlux), cex.main = 0.7)
 ## put an extent and a CRS together
 spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 ```
 
+## TODO
 
+* 'byid' for multi-objects
+* by-group for multi objects
+* raster edge extent with pixel corner vertices
+* max segment length densification, in crs or by great-circle
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

@@ -11,12 +11,20 @@ Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object underst
 
 There is also a method to put an extent and a crs together.
 
+Installation
+------------
+
+Install 'spex' from CRAN.
+
+``` r
+install.packages("spex")
+```
+
 Examples
 --------
 
 ``` r
 library(spex)
-#> No methods found in "raster" for requests: as
 library(raster)
 #> Loading required package: sp
 data(lux)
@@ -30,20 +38,24 @@ data(lux)
 #> min values  :   1 
 #> max values  :   1
 
-plot(lux)
-plot(exlux, add = TRUE)
-title(projection(exlux), cex.main = 0.7)
-```
-
-![](README-unnamed-chunk-2-1.png)
-
-``` r
 ## put an extent and a CRS together
 spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
-#> class       : SpatialPolygons 
+#> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : +proj=laea +ellps=WGS84
+#> coord. ref. : +proj=laea +ellps=WGS84 
+#> variables   : 1
+#> names       : p 
+#> min values  : 1 
+#> max values  : 1
 ```
+
+TODO
+----
+
+-   'byid' for multi-objects
+-   by-group for multi objects
+-   raster edge extent with pixel corner vertices
+-   max segment length densification, in crs or by great-circle
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
