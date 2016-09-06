@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>spex. spex 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">spex 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>spex</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='spex.html'>spex</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for default</span>
+<span class="functioncall"><a href='spex.html'>spex</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">byid</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="symbol">.id</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+
+<span class="comment"># S3 method for Extent</span>
+<span class="functioncall"><a href='spex.html'>spex</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="symbol">crs</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>any object with a <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code></dd>
+      <dt>...</dt>
+      <dd>arguments for methods</dd>
+      <dt>byid</dt>
+      <dd>return a separate object for every input sub-object (not yet implemented)</dd>
+      <dt>.id</dt>
+      <dd>optional name for output attribute name</dd>
+      <dt>crs</dt>
+      <dd>a projection string</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+&#39;SpatialPolygonsDataFrame&#39;
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>spex</p>
+
+      <p>Create Spatial Polygons with projection metadata from a &#39;Spatial Extent&#39;.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>This function is to replace a common pattern in the &#39;sp&#39;-&#39;raster&#39; family which is
+<ul>
+<li> create an <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code>, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
+</li>
+<li> coerce the Extent to <code><a href='http://www.rdocumentation.org/packages/sp/topics/SpatialPolygons'>SpatialPolygons</a></code>
+</li>
+<li> restore the &#39;CRS&#39;, the &quot;coordinate reference system&quot;, i.e. projection metadata
+</li>
+<li> elevate the object to be a <code><a href='http://www.rdocumentation.org/packages/sp/topics/SpatialPolygons'>SpatialPolygonsDataFrame</a></code>.
+</li>
+</ul></p>
+
+      <p>In short, this pattern exists because there is no projection metadata stored
+ with either sp&#39;&#39;s <code><a href='http://www.rdocumentation.org/packages/sp/topics/bbox'>bbox</a></code> or &#39;raster&#39;&#39;s <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code>.</p>
+
+    </div>
+
+    <div class="Spatial Extent">
+      <h2>Spatial Extent</h2>
+
+      <p></p>
+
+      <p><table><tr><td>
+ <code><a href='spex.html'>spex</a></code> </td>
+</tr><tr><td> function to produce a fully fledged Spatial object extent </td>
+</tr></table></p>
+
+    </div>
+
+    <div class="Warning">
+      <h2>Warning</h2>
+
+      <p>Please note that an extent converted to polygons consists
+of only four unique coordinates, and so this is not necessarily suited for
+projection transformations.</p>
+
+    </div>
+
+    <div class="Potentially Unwelcome Rant">
+      <h2>Potentially Unwelcome Rant</h2>
+
+      <p></p>
+
+      <p>Consider also that this is a common limitation, outside of R, where the &quot;OGC
+standard&quot; for serialized geometry in &quot;well known text&quot; (WKT) or &quot;well known
+binary&quot; (WKB) do not include projection metadata.   Some GIS systems do
+provide serialized geometries that include this crucial metadata, and may we
+encourage this to become more common. Not only is &quot;longitude / latitude&quot;
+coordinates not always suitable, they are actually meaningless without
+knowing the _datum_ (the ellipsoid radii and orientation, often WGS84) and
+the units in use (usually &#39;degrees&#39;, but sometimes &#39;radians&#39;)</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/library'>library</a></span><span class="keyword">(</span><span class="symbol">raster</span><span class="keyword">)</span></div>
+<strong class='message'>Loading required package: sp</strong>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="symbol">lux</span><span class="keyword">)</span>
+<span class="symbol">exlux</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='spex.html'>spex</a></span><span class="keyword">(</span><span class="symbol">lux</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">lux</span><span class="keyword">)</span></div>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">exlux</span><span class="keyword">,</span> <span class="argument">add</span> <span class="argument">=</span> <span class="number">TRUE</span><span class="keyword">)</span></div>
+<p><img src='spex-5.png' alt='' width='540' height='400' /></p>
+<div class='input'>
+<span class="comment">## put an extent and a CRS together</span>
+<span class="functioncall"><a href='spex.html'>spex</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">,</span> <span class="number">0</span><span class="keyword">,</span> <span class="number">1</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">crs</span> <span class="argument">=</span> <span class="string">"+proj=laea +ellps=WGS84"</span><span class="keyword">)</span></div>
+<div class='output'>class       : SpatialPolygonsDataFrame 
+features    : 1 
+extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=laea +ellps=WGS84 
+variables   : 1
+names       : p 
+min values  : 1 
+max values  : 1 
+</div>
+<div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment">#  ## library(rgdal)</span>
+<span class="comment">#  ## p4 &lt;- "+proj=laea +ellps=WGS84"</span>
+<span class="comment">#  ## plot(spTransform(lux, p4))</span>
+<span class="comment">#  ## warning, this is just 4 coordinates</span>
+<span class="comment">#  ## plot(spTransform(exlux, p4), add = TRUE)</span>
+<span class="comment">## ---------------------------------------------</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>spex</li><li>spex-package</li><li>spex.Extent</li><li>spex.default</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+    <h2>See also</h2>
+      <p>This pattern is displayed in the example code for <code><a href='http://www.rdocumentation.org/packages/raster/topics/cover'>cover</a></code>.</p>
+
+    
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

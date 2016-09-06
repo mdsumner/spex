@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Home. spex 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">spex 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<p><a href="https://travis-ci.org/mdsumner/spex"><img src="https://travis-ci.org/mdsumner/spex.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/mdsumner/spex"><img src="https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a> <a href="https://cran.r-project.org/package=spex"><img src="http://www.r-pkg.org/badges/version/spex" alt="CRAN\_Status\_Badge"/></a> <a href="https://codecov.io/github/mdsumner/spex?branch=master"><img src="https://img.shields.io/codecov/c/github/mdsumner/spex/master.svg" alt="Coverage Status"/></a></p>
+
+<h2>spex</h2>
+
+<p>Spatial extent with projection metadata.</p>
+
+<p>Create a fully-fledged SpatialPolygonsDataFrame <em>extent</em> from any object understood by the &#39;raster&#39; package function &#39;extent()&#39;. If the input has projection metadata it will be carried through to the output.</p>
+
+<p>There is also a method to put an extent and a crs together.</p>
+
+<h2>Installation</h2>
+
+<p>Install &#39;spex&#39; from CRAN.</p>
+
+<pre><code class="r">install.packages(&quot;spex&quot;)
+</code></pre>
+
+<h2>Examples</h2>
+
+<pre><code class="r">library(spex)
+library(raster)
+#&gt; Loading required package: sp
+data(lux)
+(exlux &lt;- spex(lux))
+#&gt; class       : SpatialPolygonsDataFrame 
+#&gt; features    : 1 
+#&gt; extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)
+#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+#&gt; variables   : 1
+#&gt; names       : lux 
+#&gt; min values  :   1 
+#&gt; max values  :   1
+
+## put an extent and a CRS together
+spex(extent(0, 1, 0, 1), crs = &quot;+proj=laea +ellps=WGS84&quot;)
+#&gt; class       : SpatialPolygonsDataFrame 
+#&gt; features    : 1 
+#&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
+#&gt; coord. ref. : +proj=laea +ellps=WGS84 
+#&gt; variables   : 1
+#&gt; names       : p 
+#&gt; min values  : 1 
+#&gt; max values  : 1
+</code></pre>
+
+<h2>TODO</h2>
+
+<ul>
+<li>  &#39;byid&#39; for multi-objects</li>
+<li>  by-group for multi objects</li>
+<li>  raster edge extent with pixel corner vertices</li>
+<li>  max segment length densification, in crs or by great-circle</li>
+</ul>
+
+<p>Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.</p>
+
+  </div>
+
+  <div class="span3 offset1 sidebar">
+        <h2>Authors</h2>
+    <ul>
+      <li><a href='mailto:mdsumner@gmail.com'>Michael D. Sumner</a> [aut, cre]</li>
+    </ul>
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
