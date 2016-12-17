@@ -23,6 +23,8 @@ install.packages("spex")
 Examples
 --------
 
+Create a Spatial object as a single extent polygon from a raster.
+
 ``` r
 library(spex)
 library(raster)
@@ -48,6 +50,37 @@ spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 #> names       : p 
 #> min values  : 1 
 #> max values  : 1
+```
+
+Create a simple features POLYGON object from a raster.
+
+``` r
+library(spex)
+library(raster)
+r <- raster(volcano)
+tm <- system.time(p <- qm_rasterToPolygons(r))
+
+nrow(p)
+#> [1] 5307
+
+head(p)
+#> Simple feature collection with 6 features and 1 field
+#> geometry type:  POLYGON
+#> dimension:      XY
+#> bbox:           xmin: 0 ymin: 0.9885057 xmax: 0.09836065 ymax: 1
+#> epsg (SRID):    NA
+#> proj4string:    NA
+#>   layer                       geometry
+#> 1   100 POLYGON((0 1, 0.01639344237...
+#> 2   100 POLYGON((0.0163934423786695...
+#> 3   101 POLYGON((0.032786884757339 ...
+#> 4   101 POLYGON((0.0491803271360085...
+#> 5   101 POLYGON((0.065573769514678 ...
+#> 6   101 POLYGON((0.0819672118933474...
+
+print(tm)
+#>    user  system elapsed 
+#>   0.280   0.044   0.325
 ```
 
 TODO

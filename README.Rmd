@@ -50,6 +50,20 @@ data(lux)
 spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 ```
 
+Create a simple features POLYGON object from a raster. 
+
+```{r}
+library(spex)
+library(raster)
+r <- raster(volcano)
+tm <- system.time(p <- qm_rasterToPolygons(r))
+
+nrow(p)
+
+head(p)
+
+print(tm)
+```
 ## TODO
 
 * 'byid' for multi-objects
