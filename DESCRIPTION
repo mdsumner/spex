@@ -7,7 +7,7 @@ Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
 Description: Functions to produce a fully fledged 'Spatial' object extent as a
     'SpatialPolygonsDataFrame'. Also included are functions to generate polygons
     from raster using 'quadmesh' techniques, and a round number buffered extent for
-    generating analytical data structures. 
+    generating data structures. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
