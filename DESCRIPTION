@@ -1,7 +1,7 @@
 Package: spex
 Type: Package
 Title: Spatial Extent as Polygons with Projection
-Version: 0.2.0
+Version: 0.2.0.9001
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
 Description: Functions to produce a fully fledged 'Spatial' object extent as a
@@ -14,10 +14,9 @@ Imports:
     methods,
     quadmesh,
     raster,
-    sf,
     sp,
     stats
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 URL: https://github.com/mdsumner/spex
 BugReports: https://github.com/mdsumner/spex/issues
 Suggests: covr,

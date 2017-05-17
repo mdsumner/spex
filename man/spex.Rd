@@ -4,8 +4,11 @@
 \name{spex}
 \alias{spex}
 \alias{spex-package}
-\alias{spex.Extent}
+\alias{spex}
+\alias{spex}
 \alias{spex.default}
+\alias{spex}
+\alias{spex.Extent}
 \title{spex}
 \usage{
 spex(x, ...)
@@ -69,6 +72,7 @@ coordinates not always suitable, they are actually meaningless without
 knowing the _datum_ (the ellipsoid radii and orientation, often WGS84) and
 the units in use (usually 'degrees', but sometimes 'radians')
 }
+
 \examples{
 library(raster)
 data(lux)
@@ -90,4 +94,3 @@ spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 \seealso{
 This pattern is displayed in the example code for \code{\link[raster]{cover}}.
 }
-

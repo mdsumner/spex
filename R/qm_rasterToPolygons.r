@@ -3,7 +3,9 @@
 #' This method uses the quadmesh to generate the coordinates, and creates a simple features layer. 
 #' It's faster by turning off the checking done in the simple features package, but it's also faster
 #' than raster because it uses a dense mesh to generate the coordinates. 
+#'
 #' @param x raster, brick or stack
+#' @param ... arguments passed to methods, currently unused
 #'
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
 #' @export
@@ -26,25 +28,54 @@
 #' # 2 qm_rasterToPolygons_sp(r)            2   4.012    8.429     3.964    0.048          0         0
 #' # 3       rasterToPolygons(r)            2   2.274    4.777     2.268    0.008          0         0
 #' @importFrom raster as.data.frame
-#' @importFrom sf st_as_sf st_sfc 
 #' @importFrom quadmesh quadmesh
-qm_rasterToPolygons <- function(x) {
+#' @importFrom raster projection
+#' @rdname polygonize
+#' @name polygonize
+#' @aliases qm_rasterToPolygons qm_rasterToPolygons_sp
+#' @export
+polygonize.RasterLayer <- function(x, ...) {
   ## create dense mesh of cell corner coordinates
   qm <- quadmesh::quadmesh(x)
   ## split the mesh and construct simple features POLYGONS (without checking them)
   l <- lapply(split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4)), function(x) structure(list(matrix(x, ncol = 2)[c(1, 2, 3, 4, 1), ]), 
                                                                                                       class = c("XY", "POLYGON", "sfg")))
   ## get all the layers off the raster
-  sf1 <- as.data.frame(x)
+  sf1 <- raster::as.data.frame(x)
   ## add the geometry column
-  sf1[["geometry"]] <- sf::st_sfc(l)
+  #sf1[["geometry"]] <- sf::st_sfc(l)
+  sf1[["geometry"]] <- structure(l, n_empty = 0L, 
+                                 crs = structure(list(epsg = NA_integer_, proj4string = raster::projection(x)), class = "crs"),
+                                 precision = 0, 
+            bbox = structure(c(xmin = raster::xmin(x), ymin = raster::ymin(x), xmax = raster::xmax(x), ymax = raster::ymax(x)), 
+                             class = "bbox"), class = c("sfc_POLYGON", "sfc"))
   ## cast as simple features object
-  sf::st_as_sf(sf1)
+  structure(sf1, sf_column = "geometry", agr = NULL, class = c("sf", "data.frame"))
 }
+#' @name polygonize
+#' @export
+polygonize <- function(x, ...) UseMethod("polygonize")
+#' @name polygonize
+#' @export
+qm_rasterToPolygons <- polygonize.RasterLayer
+#' @name polygonize
+#' @export
+polygonize.RasterStack <- qm_rasterToPolygons
+#' @name polygonize
+#' @export
+polygonize.RasterBrick <- qm_rasterToPolygons
 
-#' @name qm_rasterToPolygons
-qm_rasterToPolygons_sp <- function(x) {
-  as(qm_rasterToPolygons(x), "Spatial")
+
+#' @name polygonize
+#' @export
+qm_rasterToPolygons_sp <- function(x, ...) {
+  x0 <- polygonize(x)
+  g <- unclass(x0[[attr(x0, "sf_column")]])
+  x0[[attr(x0, "sf_column")]] <- NULL
+     
+  gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
+  sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
+                               as.data.frame(unclass(x0)))
 }
 
 

@@ -20,7 +20,9 @@ knitr::opts_chunk$set(
 
 ## spex
 
-Spatial extent with projection metadata. 
+* Spatial extent with projection metadata. 
+* polygonize to pixel rectangles using fast quadmesh (provides an sf POLYGON data frame)
+* convenience functions for tidy extents
 
 Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood
 by the 'raster' package function 'extent()'. If the input has projection metadata it
