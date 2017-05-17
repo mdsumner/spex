@@ -59,12 +59,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/mdsumner/spex">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -146,18 +141,6 @@
 of only four unique coordinates, and so this is not necessarily suited for
 projection transformations.</p>
     
-    <h2 class="hasAnchor" id="potentially-unwelcome-rant"><a class="anchor" href="#potentially-unwelcome-rant"></a>Potentially Unwelcome Rant</h2>
-
-    
-    <p>Consider also that this is a common limitation, outside of R, where the "OGC
-standard" for serialized geometry in "well known text" (WKT) or "well known
-binary" (WKB) do not include projection metadata.   Some GIS systems do
-provide serialized geometries that include this crucial metadata, and may we
-encourage this to become more common. Not only is "longitude / latitude"
-coordinates not always suitable, they are actually meaningless without
-knowing the _datum_ (the ellipsoid radii and orientation, often WGS84) and
-the units in use (usually 'degrees', but sometimes 'radians')</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>This pattern is displayed in the example code for <code><a href='http://www.rdocumentation.org/packages/raster/topics/cover'>cover</a></code>.</p>
@@ -197,8 +180,6 @@ the units in use (usually 'degrees', but sometimes 'radians')</p>
       <li><a href="#spatial-extent">Spatial Extent</a></li>
 
       <li><a href="#warning">Warning</a></li>
-
-      <li><a href="#potentially-unwelcome-rant">Potentially Unwelcome Rant</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
