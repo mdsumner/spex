@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/mdsumner/spex.svg?branch=master)](https://travis-ci.org/mdsumner/spex) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/spex) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex) [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/spex/master.svg)](https://codecov.io/github/mdsumner/spex?branch=master) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spex)](http://cran.r-project.org/web/packages/spex/index.html)
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/spex.svg?branch=master)](https://travis-ci.org/mdsumner/spex) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/spex) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex) [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/spex/master.svg)](https://codecov.io/github/mdsumner/spex?branch=master) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spex)](https://CRAN.R-project.org/package=spex)
 
 spex
 ----
@@ -77,7 +77,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.276   0.040   0.313
+#>   0.268   0.040   0.310
 ```
 
 Create a buffered extent with whole-number aligned edges.

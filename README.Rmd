@@ -8,7 +8,7 @@ output: github_document
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/spex)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/spex/master.svg)](https://codecov.io/github/mdsumner/spex?branch=master)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spex)](http://cran.r-project.org/web/packages/spex/index.html)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spex)]( https://CRAN.R-project.org/package=spex)
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
