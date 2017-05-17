@@ -8,3 +8,5 @@ test_that("extent and crs works", {
 test_that("by id is not implemented", {
   expect_that(spex(lux, byid = TRUE), throws_error("implemented"))
 })
+
+

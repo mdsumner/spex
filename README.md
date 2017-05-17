@@ -5,11 +5,17 @@
 spex
 ----
 
-Spatial extent with projection metadata.
+Spex provides a small set of functions for working with spatial data. These are
+
+-   `spex()` - a spatial extent with projection metadata
+-   `polygonize()` - a fast quadmesh-based pixel-to-polygon translation
+-   `buffer_extent` - a convenience function for tidy extents
 
 Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood by the 'raster' package function 'extent()'. If the input has projection metadata it will be carried through to the output.
 
-There is also a method to put an extent and a crs together.
+The polygonization approach is faster than `rasterToPolygons`, and multi-layer rasters are converted to multi-column spatial data frames. This only does the pixel-to-polygon case. It provides an `sf` POLYGON data frame, but there is a version `qm_rasterToPolygons_sp` that returns a Spatial version.
+
+The "buffered extent" is used to create cleanly aligned extents, useful for generating exacting grid structures as raster or vector.
 
 Installation
 ------------
@@ -52,7 +58,7 @@ spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 #> max values  : 1
 ```
 
-Create a simple features POLYGON object from a raster.
+Create a simple features POLYGON data frame from a raster.
 
 ``` r
 library(spex)
@@ -64,31 +70,56 @@ nrow(p)
 #> [1] 5307
 
 head(p)
-#> Simple feature collection with 6 features and 1 field
-#> geometry type:  POLYGON
-#> dimension:      XY
-#> bbox:           xmin: 0 ymin: 0.9885057 xmax: 0.09836065 ymax: 1
-#> epsg (SRID):    NA
-#> proj4string:    NA
-#>   layer                       geometry
-#> 1   100 POLYGON((0 1, 0.01639344237...
-#> 2   100 POLYGON((0.0163934423786695...
-#> 3   101 POLYGON((0.032786884757339 ...
-#> 4   101 POLYGON((0.0491803271360085...
-#> 5   101 POLYGON((0.065573769514678 ...
-#> 6   101 POLYGON((0.0819672118933474...
+#>   layer
+#> 1   100
+#> 2   100
+#> 3   101
+#> 4   101
+#> 5   101
+#> 6   101
+#>                                                                                                                 geometry
+#> 1 0.00000000, 0.01639344, 0.01639344, 0.00000000, 0.00000000, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+#> 2 0.01639344, 0.03278688, 0.03278688, 0.01639344, 0.01639344, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+#> 3 0.03278688, 0.04918033, 0.04918033, 0.03278688, 0.03278688, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+#> 4 0.04918033, 0.06557377, 0.06557377, 0.04918033, 0.04918033, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+#> 5 0.06557377, 0.08196721, 0.08196721, 0.06557377, 0.06557377, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+#> 6 0.08196721, 0.09836065, 0.09836065, 0.08196721, 0.08196721, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
 
 print(tm)
 #>    user  system elapsed 
-#>   0.280   0.044   0.325
+#>   0.268   0.068   0.337
+```
+
+Create a buffered extent with whole-number aligned edges.
+
+``` r
+library(spex)
+
+(ex <- extent(lux))
+#> class       : Extent 
+#> xmin        : 5.74414 
+#> xmax        : 6.528252 
+#> ymin        : 49.44781 
+#> ymax        : 50.18162
+
+buffer_extent(ex, 10)
+#> class       : Extent 
+#> xmin        : 0 
+#> xmax        : 10 
+#> ymin        : 40 
+#> ymax        : 60
+
+buffer_extent(ex, 2)
+#> class       : Extent 
+#> xmin        : 4 
+#> xmax        : 8 
+#> ymin        : 48 
+#> ymax        : 52
 ```
 
 TODO
 ----
 
--   'byid' for multi-objects
--   by-group for multi objects
--   raster edge extent with pixel corner vertices
--   max segment length densification, in crs or by great-circle
+-   max segment length densification, in crs (for densifying the object as it was provided)
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

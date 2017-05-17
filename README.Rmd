@@ -20,15 +20,21 @@ knitr::opts_chunk$set(
 
 ## spex
 
-* Spatial extent with projection metadata. 
-* polygonize to pixel rectangles using fast quadmesh (provides an sf POLYGON data frame)
-* convenience functions for tidy extents
+Spex provides a small set of functions for working with spatial data. These are
+
+
+* `spex()` - a spatial extent with projection metadata
+* `polygonize()` - a fast quadmesh-based pixel-to-polygon translation 
+* `buffer_extent` - a convenience function for tidy extents
 
 Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood
 by the 'raster' package function 'extent()'. If the input has projection metadata it
 will be carried through to the output. 
 
-There is also a method to put an extent and a crs together. 
+The polygonization approach is faster than `rasterToPolygons`, and multi-layer rasters are converted to multi-column spatial data frames. This only does the pixel-to-polygon case. It provides an `sf` POLYGON data frame, but there is a version `qm_rasterToPolygons_sp` that returns a Spatial version. 
+
+The "buffered extent" is used to create cleanly aligned extents, useful for generating exacting grid structures
+as raster or vector. 
 
 ## Installation
 
@@ -52,7 +58,7 @@ data(lux)
 spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 ```
 
-Create a simple features POLYGON object from a raster. 
+Create a simple features POLYGON data frame from a raster. 
 
 ```{r}
 library(spex)
@@ -62,15 +68,28 @@ tm <- system.time(p <- qm_rasterToPolygons(r))
 
 nrow(p)
 
-head(p)
+class(p)
+
+class(p$geometry)
 
 print(tm)
 ```
+
+Create a buffered extent with whole-number aligned edges. 
+
+```{r}
+library(spex)
+
+(ex <- extent(lux))
+
+buffer_extent(ex, 10)
+
+buffer_extent(ex, 2)
+```
+
+
 ## TODO
 
-* 'byid' for multi-objects
-* by-group for multi objects
-* raster edge extent with pixel corner vertices
-* max segment length densification, in crs or by great-circle
+* max segment length densification, in crs (for densifying the object as it was provided)
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
