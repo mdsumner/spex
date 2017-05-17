@@ -44,16 +44,6 @@
 #'  ## plot(spTransform(exlux, p4), add = TRUE)
 #' }
 #' @export
-#' @section Potentially Unwelcome Rant:
-#' Consider also that this is a common limitation, outside of R, where the "OGC
-#' standard" for serialized geometry in "well known text" (WKT) or "well known
-#' binary" (WKB) do not include projection metadata.   Some GIS systems do
-#' provide serialized geometries that include this crucial metadata, and may we
-#' encourage this to become more common. Not only is "longitude / latitude"
-#' coordinates not always suitable, they are actually meaningless without
-#' knowing the _datum_ (the ellipsoid radii and orientation, often WGS84) and
-#' the units in use (usually 'degrees', but sometimes 'radians')
-#'
 #' @seealso This pattern is displayed in the example code for \code{\link[raster]{cover}}.
 spex <- function(x, ...) {
   UseMethod("spex")

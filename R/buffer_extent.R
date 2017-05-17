@@ -5,12 +5,20 @@
 #' This function is used to generate extents that have tidy boundaries, 
 #' i.e. extents that align to a clean whole number like "10000". 
 #' 
-#' (We can't to S4 group generic because raster has set that specifically for use with '+' and '-'.) 
+#' (We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.) 
 #' @param e1 input \code{\link[raster]{extent}}
 #' @param e2 grain size
 #' @examples
 #' library(raster)
 #' buffer_extent(extent(0.1, 2.2, 0, 3), 2)
+#' 
+#' p <- par(xpd = NA) 
+#' plot(lux)
+#' plot(extent(lux), lty = 2, add = TRUE, col = "grey")
+#' plot(buffer_extent(lux, 0.1), add = TRUE)
+#' abline(v = c(5.7, 6.6), h = c(49.4, 50.2))
+#' title("boundaries on clean alignment to 0.1")
+#' par(p)
 #' @importFrom raster extent xmin xmax ymin ymax
 #' @export
 buffer_extent <- function(e1, e2) {

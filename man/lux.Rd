@@ -15,3 +15,7 @@
 \description{
 The 'lux' Spatial Polygons from the 'raster' package.
 }
+\examples{
+library(sp)
+plot(lux)
+}

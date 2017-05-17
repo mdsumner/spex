@@ -20,4 +20,7 @@ NULL
 #'  \item AREA
 #' }
 #' @docType data
+#' @examples
+#' library(sp)
+#' plot(lux)
 NULL

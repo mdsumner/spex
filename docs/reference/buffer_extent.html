@@ -102,7 +102,7 @@
 
     <p>This function is used to generate extents that have tidy boundaries, 
 i.e. extents that align to a clean whole number like "10000".</p>
-<p>(We can't to S4 group generic because raster has set that specifically for use with '+' and '-'.)</p>
+<p>(We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.)</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -111,7 +111,9 @@ i.e. extents that align to a clean whole number like "10000".</p>
 #&gt; xmin        : 0 
 #&gt; xmax        : 4 
 #&gt; ymin        : 0 
-#&gt; ymax        : 4 </div></pre>
+#&gt; ymax        : 4 </div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>par</span>(<span class='kw'>xpd</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+<span class='fu'>plot</span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'>plot</span>(<span class='fu'>extent</span>(<span class='no'>lux</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)</div><div class='input'><span class='fu'>plot</span>(<span class='fu'>buffer_extent</span>(<span class='no'>lux</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'>abline</span>(<span class='kw'>v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5.7</span>, <span class='fl'>6.6</span>), <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>49.4</span>, <span class='fl'>50.2</span>))</div><div class='input'><span class='fu'>title</span>(<span class='st'>"boundaries on clean alignment to 0.1"</span>)</div><img src='buffer_extent-8.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>par</span>(<span class='no'>op</span>)</div><div class='output co'>#&gt; <span class='error'>Error in par(op): object 'op' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
