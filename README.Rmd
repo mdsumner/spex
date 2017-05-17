@@ -88,8 +88,5 @@ buffer_extent(ex, 2)
 ```
 
 
-## TODO
-
-* max segment length densification, in crs (for densifying the object as it was provided)
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

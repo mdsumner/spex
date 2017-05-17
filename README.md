@@ -69,25 +69,15 @@ tm <- system.time(p <- qm_rasterToPolygons(r))
 nrow(p)
 #> [1] 5307
 
-head(p)
-#>   layer
-#> 1   100
-#> 2   100
-#> 3   101
-#> 4   101
-#> 5   101
-#> 6   101
-#>                                                                                                                 geometry
-#> 1 0.00000000, 0.01639344, 0.01639344, 0.00000000, 0.00000000, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
-#> 2 0.01639344, 0.03278688, 0.03278688, 0.01639344, 0.01639344, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
-#> 3 0.03278688, 0.04918033, 0.04918033, 0.03278688, 0.03278688, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
-#> 4 0.04918033, 0.06557377, 0.06557377, 0.04918033, 0.04918033, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
-#> 5 0.06557377, 0.08196721, 0.08196721, 0.06557377, 0.06557377, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
-#> 6 0.08196721, 0.09836065, 0.09836065, 0.08196721, 0.08196721, 1.00000000, 1.00000000, 0.98850575, 0.98850575, 1.00000000
+class(p)
+#> [1] "sf"         "data.frame"
+
+class(p$geometry)
+#> [1] "sfc_POLYGON" "sfc"
 
 print(tm)
 #>    user  system elapsed 
-#>   0.268   0.068   0.337
+#>   0.276   0.040   0.313
 ```
 
 Create a buffered extent with whole-number aligned edges.
@@ -116,10 +106,5 @@ buffer_extent(ex, 2)
 #> ymin        : 48 
 #> ymax        : 52
 ```
-
-TODO
-----
-
--   max segment length densification, in crs (for densifying the object as it was provided)
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

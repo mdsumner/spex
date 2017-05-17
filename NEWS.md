@@ -1,10 +1,8 @@
-# spex dev
+# spex 0.3.0
 
-* new function 'buffer_extent' for whole-grain expansion
+* new function `buffer_extent` for whole-grain expansion
 
-* added S3 generic polygonize, alias of qm_rasterToPolygons
-
-* removed dependence on sf
+* added S3 generic `polygonize`, alias of `qm_rasterToPolygons`
 
 # spex 0.2.0
 
