@@ -16,20 +16,22 @@
 \alias{qm_rasterToPolygons_sp}
 \title{Create a polygon layer from a raster.}
 \usage{
-\method{polygonize}{RasterLayer}(x, ...)
+\method{polygonize}{RasterLayer}(x, na.rm = FALSE, ...)
 
 polygonize(x, ...)
 
-qm_rasterToPolygons(x, ...)
+qm_rasterToPolygons(x, na.rm = FALSE, ...)
 
-\method{polygonize}{RasterStack}(x, ...)
+\method{polygonize}{RasterStack}(x, na.rm = FALSE, ...)
 
-\method{polygonize}{RasterBrick}(x, ...)
+\method{polygonize}{RasterBrick}(x, na.rm = FALSE, ...)
 
-qm_rasterToPolygons_sp(x, ...)
+qm_rasterToPolygons_sp(x, na.rm = FALSE, ...)
 }
 \arguments{
 \item{x}{raster, brick or stack}
+
+\item{na.rm}{defaults to `FALSE`, if `TRUE` will polygonize only the populated cells}
 
 \item{...}{arguments passed to methods, currently unused}
 }
@@ -52,8 +54,9 @@ operations on them, simple features is incredibly wasteful for objects like this
 #library(raadtools)
 library(raster)
 r <- raster(volcano)
+r[sample(ncell(r), 3000)] <- NA
 b <- brick(r, r*1.5)
-psf <- qm_rasterToPolygons(r)
+psf <- qm_rasterToPolygons(r, na.rm = TRUE)
 #psp <- qm_rasterToPolygons_sp(r)
 #pspr <- rasterToPolygons(r)
 #library(rbenchmark)

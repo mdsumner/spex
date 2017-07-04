@@ -5,6 +5,7 @@
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
 #' @param x raster, brick or stack
+#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the populated cells
 #' @param ... arguments passed to methods, currently unused
 #'
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
@@ -17,8 +18,9 @@
 #' #library(raadtools)
 #' library(raster)
 #' r <- raster(volcano)
+#' r[sample(ncell(r), 3000)] <- NA
 #' b <- brick(r, r*1.5)
-#' psf <- qm_rasterToPolygons(r)
+#' psf <- qm_rasterToPolygons(r, na.rm = TRUE)
 #' #psp <- qm_rasterToPolygons_sp(r)
 #' #pspr <- rasterToPolygons(r)
 #' #library(rbenchmark)
@@ -34,14 +36,17 @@
 #' @name polygonize
 #' @aliases qm_rasterToPolygons qm_rasterToPolygons_sp
 #' @export
-polygonize.RasterLayer <- function(x, ...) {
+polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   ## create dense mesh of cell corner coordinates
-  qm <- quadmesh::quadmesh(x)
+  qm <- quadmesh::quadmesh(x, na.rm = na.rm)
   ## split the mesh and construct simple features POLYGONS (without checking them)
   l <- lapply(split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4)), function(x) structure(list(matrix(x, ncol = 2)[c(1, 2, 3, 4, 1), ]), 
                                                                                                       class = c("XY", "POLYGON", "sfg")))
   ## get all the layers off the raster
   sf1 <- raster::as.data.frame(x)
+  if (na.rm ) {
+    sf1 <- sf1[!is.na(values(x[[1]])), , drop = FALSE]
+  }
   ## add the geometry column
   #sf1[["geometry"]] <- sf::st_sfc(l)
   sf1[["geometry"]] <- structure(l, n_empty = 0L, 
@@ -68,14 +73,14 @@ polygonize.RasterBrick <- qm_rasterToPolygons
 
 #' @name polygonize
 #' @export
-qm_rasterToPolygons_sp <- function(x, ...) {
-  x0 <- polygonize(x)
+qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
+  x0 <- polygonize(x, na.rm = na.rm)
   g <- unclass(x0[[attr(x0, "sf_column")]])
   x0[[attr(x0, "sf_column")]] <- NULL
      
   gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
   sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
-                               as.data.frame(unclass(x0)))
+                               as.data.frame(unclass(x0))[!is.na(values(x[[1]])), , drop = FALSE], match.ID = FALSE)
 }
 
 
