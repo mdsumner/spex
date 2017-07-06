@@ -1,5 +1,7 @@
 # spex dev
 
+* `spex()` with no input argument will return the extents of the current par 'usr' setting
+
 * `polygonize`, `qm_rasterToPolygons`, and `qm_rasterToPolygons_sp` gain `na.rm` 
  argument to optionally remove any cells that are `NA` (in the first layer)
 

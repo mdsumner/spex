@@ -45,7 +45,7 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   ## get all the layers off the raster
   sf1 <- raster::as.data.frame(x)
   if (na.rm ) {
-    sf1 <- sf1[!is.na(values(x[[1]])), , drop = FALSE]
+    sf1 <- sf1[!is.na(raster::values(x[[1]])), , drop = FALSE]
   }
   ## add the geometry column
   #sf1[["geometry"]] <- sf::st_sfc(l)

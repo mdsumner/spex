@@ -2,6 +2,7 @@
 #'
 #' Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
 #'
+#' Called with no arguments will return the extent of the current 'par("usr")' setting. 
 #' This function is to replace a common pattern in the 'sp'-'raster' family which is
 #' \itemize{
 #' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
@@ -51,8 +52,10 @@ spex <- function(x, ...) {
 
 #' @export
 #' @name spex
-spex.default <- function(x, byid = FALSE, .id, ...) {
-  if (byid) {
+spex.default <- function(x, crs, byid = FALSE, .id, ...) {
+  if (missing(crs)) crs <- NULL
+   if (missing(x)) return(spex(raster::extent(graphics::par("usr")), crs = crs))
+    if (byid) {
     stop("byid option not yet implemented")
     #lapply(split(x, seq(nrow(x))), raster::extent)
   } else {
