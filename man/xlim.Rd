@@ -2,17 +2,29 @@
 % Please edit documentation in R/spex.R
 \name{xlim}
 \alias{xlim}
+\alias{xlim}
+\alias{xlim.default}
+\alias{xlim}
+\alias{ylim}
+\alias{xlim}
+\alias{ylim.default}
 \title{Axis ranges from extent}
 \usage{
 xlim(x, ...)
+
+\method{xlim}{default}(x, ...)
+
+ylim(x, ...)
+
+\method{ylim}{default}(x, ...)
 }
 \arguments{
-\item{x}{any object with an extent understood by `spex`}
+\item{x}{any object with an extent understood by \code{spex}}
 
 \item{...}{reserved for future methods}
 }
 \description{
-Functions `xlim` and `ylim` return the two-value counterparts of an extent.
+Functions \code{xlim} and \code{ylim} return the two-value counterparts of an extent.
 }
 \details{
 Any projection metadata is dropped since this is a one-dimensional entity.

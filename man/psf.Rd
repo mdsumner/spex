@@ -3,7 +3,7 @@
 \docType{data}
 \name{psf}
 \alias{psf}
-\title{A polygon data set with `sf` class.}
+\title{A polygon data set with \code{sf} class.}
 \description{
-A polygon data set with `sf` class.
+A polygon data set with \code{sf} class.
 }

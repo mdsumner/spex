@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -95,20 +102,20 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is used to generate extents that have tidy boundaries, 
+    <p>This function is used to generate extents that have tidy boundaries,
 i.e. extents that align to a clean whole number like "10000".</p>
 <p>(We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.)</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>raster</span>)
-<span class='fu'>buffer_extent</span>(<span class='fu'>extent</span>(<span class='fl'>0.1</span>, <span class='fl'>2.2</span>, <span class='fl'>0</span>, <span class='fl'>3</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; class       : Extent 
+<span class='fu'>buffer_extent</span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='fl'>0.1</span>, <span class='fl'>2.2</span>, <span class='fl'>0</span>, <span class='fl'>3</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; class       : Extent 
 #&gt; xmin        : 0 
 #&gt; xmax        : 4 
 #&gt; ymin        : 0 
 #&gt; ymax        : 4 </div><div class='input'>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>par</span>(<span class='kw'>xpd</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
-<span class='fu'>plot</span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'>plot</span>(<span class='fu'>extent</span>(<span class='no'>lux</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)</div><div class='input'><span class='fu'>plot</span>(<span class='fu'>buffer_extent</span>(<span class='no'>lux</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'>abline</span>(<span class='kw'>v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5.7</span>, <span class='fl'>6.6</span>), <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>49.4</span>, <span class='fl'>50.2</span>))</div><div class='input'><span class='fu'>title</span>(<span class='st'>"boundaries on clean alignment to 0.1"</span>)</div><img src='buffer_extent-8.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>par</span>(<span class='no'>p</span>)</div></pre>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='no'>lux</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>buffer_extent</span>(<span class='no'>lux</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'>abline</span>(<span class='kw'>v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5.7</span>, <span class='fl'>6.6</span>), <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>49.4</span>, <span class='fl'>50.2</span>))</div><div class='input'><span class='fu'>title</span>(<span class='st'>"boundaries on clean alignment to 0.1"</span>)</div><div class='img'><img src='buffer_extent-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>par</span>(<span class='no'>p</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

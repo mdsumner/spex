@@ -14,7 +14,7 @@ extent_sf(x, ...)
 \item{...}{unused}
 }
 \description{
-This is the simplest of the missing "raster support" for the sf package, 
-here using the xmin, xmax, ymin, ymax convention used by raster rather than 
+This is the simplest of the missing "raster support" for the sf package,
+here using the xmin, xmax, ymin, ymax convention used by raster rather than
 the transpose version favoured in sp and sf.
 }

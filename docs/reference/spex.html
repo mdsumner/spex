@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -82,9 +89,12 @@
     <pre class="usage"><span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>)
+<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Extent</span>
+<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for sf</span>
 <span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -99,16 +109,16 @@
       <td><p>arguments for methods</p></td>
     </tr>
     <tr>
+      <th>crs</th>
+      <td><p>a projection string</p></td>
+    </tr>
+    <tr>
       <th>byid</th>
       <td><p>return a separate object for every input sub-object (not yet implemented)</p></td>
     </tr>
     <tr>
       <th>.id</th>
       <td><p>optional name for output attribute name</p></td>
-    </tr>
-    <tr>
-      <th>crs</th>
-      <td><p>a projection string</p></td>
     </tr>
     </table>
     
@@ -118,21 +128,22 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is to replace a common pattern in the 'sp'-'raster' family which is</p><ul>
+    <p>Called with no arguments will return the extent of the current 'par("usr")' setting.
+This function is to replace a common pattern in the 'sp'-'raster' family which is</p><ul>
 <li><p>create an <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code>, a bounding box in xmin,xmax,ymin,ymax but without projection metadata</p></li>
 <li><p>coerce the Extent to <code><a href='http://www.rdocumentation.org/packages/sp/topics/SpatialPolygons'>SpatialPolygons</a></code></p></li>
 <li><p>restore the 'CRS', the "coordinate reference system", i.e. projection metadata</p></li>
 <li><p>elevate the object to be a <code><a href='http://www.rdocumentation.org/packages/sp/topics/SpatialPolygons'>SpatialPolygonsDataFrame</a></code>.</p></li>
 </ul>
     <p>In short, this pattern exists because there is no projection metadata stored
- with either sp''s <code><a href='http://www.rdocumentation.org/packages/sp/topics/bbox'>bbox</a></code> or 'raster''s <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code>.</p>
+with either sp''s <code><a href='http://www.rdocumentation.org/packages/sp/topics/bbox'>bbox</a></code> or 'raster''s <code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code>.</p>
     
     <h2 class="hasAnchor" id="spatial-extent"><a class="anchor" href="#spatial-extent"></a>Spatial Extent</h2>
 
     
     <table><tr><td>
- <code>spex</code> </td>
-</tr><tr><td> function to produce a fully fledged Spatial object extent </td>
+<code>spex</code> </td>
+<td> function to produce a fully fledged Spatial object extent </td>
 </tr></table>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
@@ -151,22 +162,23 @@ projection transformations.</p>
 <span class='fu'>data</span>(<span class='no'>lux</span>)
 <span class='no'>exlux</span> <span class='kw'>&lt;-</span> <span class='fu'>spex</span>(<span class='no'>lux</span>)
 
-<span class='fu'>plot</span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'>plot</span>(<span class='no'>exlux</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='spex-3.png' alt='' width='540' height='400' /><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>exlux</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='spex-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'>## put an extent and a CRS together</span>
-<span class='fu'>spex</span>(<span class='fu'>extent</span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>), <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +ellps=WGS84"</span>)</div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
+<span class='fu'>spex</span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>), <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +ellps=WGS84"</span>)</div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
 #&gt; features    : 1 
 #&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
 #&gt; coord. ref. : +proj=laea +ellps=WGS84 
 #&gt; variables   : 1
 #&gt; names       : p 
 #&gt; min values  : 1 
-#&gt; max values  : 1 </div><div class='input'><span class='fu'>not_run</span>({
-   <span class='co'>## library(rgdal)</span>
-   <span class='co'>## p4 &lt;- "+proj=laea +ellps=WGS84"</span>
-   <span class='co'>## plot(spTransform(lux, p4))</span>
-   <span class='co'>## warning, this is just 4 coordinates</span>
-   <span class='co'>## plot(spTransform(exlux, p4), add = TRUE)</span>
-})</div></pre>
+#&gt; max values  : 1 </div># NOT RUN {
+ ## library(rgdal)
+ ## p4 <- "+proj=laea +ellps=WGS84"
+ ## plot(spTransform(lux, p4))
+ ## warning, this is just 4 coordinates
+ ## plot(spTransform(exlux, p4), add = TRUE)
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

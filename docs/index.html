@@ -29,6 +29,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="/index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
@@ -59,9 +65,9 @@
 <p>Spex provides a small set of functions for working with spatial data. These are</p>
 <ul>
 <li>
-<code><a href="reference/spex.html">spex()</a></code> - a spatial extent with projection metadata</li>
+<code>spex()</code> - a spatial extent with projection metadata</li>
 <li>
-<code><a href="reference/polygonize.html">polygonize()</a></code> - a fast quadmesh-based pixel-to-polygon translation</li>
+<code>polygonize()</code> - a fast quadmesh-based pixel-to-polygon translation</li>
 <li>
 <code>buffer_extent</code> - a convenience function for tidy extents</li>
 </ul>
@@ -83,7 +89,7 @@
 <span class="kw">library</span>(raster)
 <span class="co">#&gt; Loading required package: sp</span>
 <span class="kw">data</span>(lux)
-(exlux &lt;-<span class="st"> </span><span class="kw"><a href="reference/spex.html">spex</a></span>(lux))
+(exlux &lt;-<span class="st"> </span><span class="kw">spex</span>(lux))
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span>
@@ -94,7 +100,7 @@
 <span class="co">#&gt; max values  :   1</span>
 
 ## put an extent and a CRS together
-<span class="kw"><a href="reference/spex.html">spex</a></span>(<span class="kw">extent</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">crs =</span> <span class="st">"+proj=laea +ellps=WGS84"</span>)
+<span class="kw">spex</span>(<span class="kw"><a href="reference/extent.html">extent</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">crs =</span> <span class="st">"+proj=laea +ellps=WGS84"</span>)
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)</span>
@@ -106,25 +112,36 @@
 <p>Create a simple features POLYGON data frame from a raster.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spex)
 <span class="kw">library</span>(raster)
-r &lt;-<span class="st"> </span><span class="kw">raster</span>(volcano)
-tm &lt;-<span class="st"> </span><span class="kw">system.time</span>(p &lt;-<span class="st"> </span><span class="kw"><a href="reference/polygonize.html">qm_rasterToPolygons</a></span>(r))
+r &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(volcano)
+tm &lt;-<span class="st"> </span><span class="kw">system.time</span>(p &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons</span>(r))
 
-<span class="kw">nrow</span>(p)
+p1 &lt;-<span class="st"> </span><span class="kw">polygonize</span>(r)
+
+<span class="kw">identical</span>(p, p1)
+<span class="co">#&gt; [1] TRUE</span>
+ 
+p3 &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons_sp</span>(r)
+<span class="kw">class</span>(p3)
+<span class="co">#&gt; [1] "SpatialPolygonsDataFrame"</span>
+<span class="co">#&gt; attr(,"package")</span>
+<span class="co">#&gt; [1] "sp"</span>
+
+<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/ncell">nrow</a></span>(p)
 <span class="co">#&gt; [1] 5307</span>
 
 <span class="kw">class</span>(p)
 <span class="co">#&gt; [1] "sf"         "data.frame"</span>
 
-<span class="kw">class</span>(p$geometry)
+<span class="kw">class</span>(p<span class="op">$</span>geometry)
 <span class="co">#&gt; [1] "sfc_POLYGON" "sfc"</span>
 
 <span class="kw">print</span>(tm)
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.272   0.052   0.324</span></code></pre></div>
+<span class="co">#&gt;   0.230   0.103   0.333</span></code></pre></div>
 <p>Create a buffered extent with whole-number aligned edges.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spex)
 
-(ex &lt;-<span class="st"> </span><span class="kw">extent</span>(lux))
+(ex &lt;-<span class="st"> </span><span class="kw"><a href="reference/extent.html">extent</a></span>(lux))
 <span class="co">#&gt; class       : Extent </span>
 <span class="co">#&gt; xmin        : 5.74414 </span>
 <span class="co">#&gt; xmax        : 6.528252 </span>
@@ -144,13 +161,42 @@ tm &lt;-<span class="st"> </span><span class="kw">system.time</span>(p &lt;-<spa
 <span class="co">#&gt; xmax        : 8 </span>
 <span class="co">#&gt; ymin        : 48 </span>
 <span class="co">#&gt; ymax        : 52</span></code></pre></div>
+<p>There are convenience functions for sf objects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(psf)
+<span class="co">#&gt; [1] "sf"         "data.frame"</span>
+<span class="kw"><a href="reference/extent.html">extent</a></span>(psf)
+<span class="co">#&gt; class       : Extent </span>
+<span class="co">#&gt; xmin        : 0 </span>
+<span class="co">#&gt; xmax        : 1.23 </span>
+<span class="co">#&gt; ymin        : 0 </span>
+<span class="co">#&gt; ymax        : 1</span>
+<span class="kw">spex</span>(psf)
+<span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
+<span class="co">#&gt; features    : 1 </span>
+<span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; coord. ref. : NA </span>
+<span class="co">#&gt; variables   : 1</span>
+<span class="co">#&gt; names       : p </span>
+<span class="co">#&gt; min values  : 1 </span>
+<span class="co">#&gt; max values  : 1</span>
+<span class="kw">spex</span>(sf<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/st_crs">st_set_crs</a></span>(psf, <span class="dv">3031</span>))
+<span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
+<span class="co">#&gt; features    : 1 </span>
+<span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span>
+<span class="co">#&gt; coord. ref. : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 </span>
+<span class="co">#&gt; variables   : 1</span>
+<span class="co">#&gt; names       : p </span>
+<span class="co">#&gt; min values  : 1 </span>
+<span class="co">#&gt; max values  : 1</span></code></pre></div>
+<p>Should we alias <code>spex</code> with <code>sfex</code> for the obvious corollary?</p>
 <p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=spex">https://​cran.r-project.org/​package=spex</a>
 </li>

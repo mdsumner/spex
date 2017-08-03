@@ -6,11 +6,11 @@
 \title{The 'lux' Spatial Polygons from the 'raster' package.}
 \format{\code{\link[sp]{SpatialPolygonsDataFrame}} with columns:
 \itemize{
- \item ID_1
- \item NAME_1
- \item ID_2
- \item NAME_2
- \item AREA
+\item ID_1
+\item NAME_1
+\item ID_2
+\item NAME_2
+\item AREA
 }}
 \description{
 The 'lux' Spatial Polygons from the 'raster' package.

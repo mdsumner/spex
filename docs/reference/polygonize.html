@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -75,25 +82,25 @@
     </div>
 
     
-    <p>This method uses the quadmesh to generate the coordinates, and creates a simple features layer. 
+    <p>This method uses the quadmesh to generate the coordinates, and creates a simple features layer.
 It's faster by turning off the checking done in the simple features package, but it's also faster
 than raster because it uses a dense mesh to generate the coordinates.</p>
     
 
     <pre class="usage"><span class='co'># S3 method for RasterLayer</span>
-<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>qm_rasterToPolygons</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>qm_rasterToPolygons</span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for RasterStack</span>
-<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for RasterBrick</span>
-<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>polygonize</span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
-<span class='fu'>qm_rasterToPolygons_sp</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>qm_rasterToPolygons_sp</span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -101,6 +108,10 @@ than raster because it uses a dense mesh to generate the coordinates.</p>
     <tr>
       <th>x</th>
       <td><p>raster, brick or stack</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>defaults to <code>FALSE</code>, if <code>TRUE</code> will polygonize only the populated cells</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -114,6 +125,7 @@ than raster because it uses a dense mesh to generate the coordinates.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
+    
     <p>Please don't try this on large rasters, use quadmesh itself for efficient vector based use of a raster's
 coordinates. It will work reasonably on largish grids, but you won't want to try plotting them or perform
 operations on them, simple features is incredibly wasteful for objects like this.</p>
@@ -122,9 +134,10 @@ operations on them, simple features is incredibly wasteful for objects like this
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#library(raadtools)</span>
 <span class='fu'>library</span>(<span class='no'>raster</span>)
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>raster</span>(<span class='no'>volcano</span>)
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>brick</span>(<span class='no'>r</span>, <span class='no'>r</span>*<span class='fl'>1.5</span>)
-<span class='no'>psf</span> <span class='kw'>&lt;-</span> <span class='fu'>qm_rasterToPolygons</span>(<span class='no'>r</span>)
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='no'>volcano</span>)
+<span class='no'>r</span>[<span class='fu'>sample</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/ncell'>ncell</a></span>(<span class='no'>r</span>), <span class='fl'>3000</span>)] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/brick'>brick</a></span>(<span class='no'>r</span>, <span class='no'>r</span>*<span class='fl'>1.5</span>)
+<span class='no'>psf</span> <span class='kw'>&lt;-</span> <span class='fu'>qm_rasterToPolygons</span>(<span class='no'>r</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'>#psp &lt;- qm_rasterToPolygons_sp(r)</span>
 <span class='co'>#pspr &lt;- rasterToPolygons(r)</span>
 <span class='co'>#library(rbenchmark)</span>

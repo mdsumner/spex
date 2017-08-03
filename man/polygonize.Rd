@@ -31,7 +31,7 @@ qm_rasterToPolygons_sp(x, na.rm = FALSE, ...)
 \arguments{
 \item{x}{raster, brick or stack}
 
-\item{na.rm}{defaults to `FALSE`, if `TRUE` will polygonize only the populated cells}
+\item{na.rm}{defaults to \code{FALSE}, if \code{TRUE} will polygonize only the populated cells}
 
 \item{...}{arguments passed to methods, currently unused}
 }
@@ -39,12 +39,12 @@ qm_rasterToPolygons_sp(x, na.rm = FALSE, ...)
 simple features POLYGON layer, or SpatialPolygonsDataFrame
 }
 \description{
-This method uses the quadmesh to generate the coordinates, and creates a simple features layer. 
+This method uses the quadmesh to generate the coordinates, and creates a simple features layer.
 It's faster by turning off the checking done in the simple features package, but it's also faster
 than raster because it uses a dense mesh to generate the coordinates.
 }
 \section{Warning}{
- 
+
 Please don't try this on large rasters, use quadmesh itself for efficient vector based use of a raster's
 coordinates. It will work reasonably on largish grids, but you won't want to try plotting them or perform
 operations on them, simple features is incredibly wasteful for objects like this.

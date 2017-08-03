@@ -66,6 +66,13 @@ library(raster)
 r <- raster(volcano)
 tm <- system.time(p <- qm_rasterToPolygons(r))
 
+p1 <- polygonize(r)
+
+identical(p, p1)
+ 
+p3 <- qm_rasterToPolygons_sp(r)
+class(p3)
+
 nrow(p)
 
 class(p)
@@ -87,6 +94,15 @@ buffer_extent(ex, 10)
 buffer_extent(ex, 2)
 ```
 
+There are convenience functions for sf objects. 
 
+```{r}
+class(psf)
+extent(psf)
+spex(psf)
+spex(sf::st_set_crs(psf, 3031))
+```
+
+Should we alias `spex` with `sfex` for the obvious corollary?
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

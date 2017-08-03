@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The 'lux' Spatial Polygons from the 'raster' package. — lux • spex</title>
+<title>Axis ranges from extent — xlim • spex</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -78,37 +78,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The 'lux' Spatial Polygons from the 'raster' package.</h1>
+    <h1>Axis ranges from extent</h1>
     </div>
 
     
-    <p>The 'lux' Spatial Polygons from the 'raster' package.</p>
+    <p>Functions <code>xlim</code> and <code>ylim</code> return the two-value counterparts of an extent.</p>
     
 
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>xlim</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-    <p><code><a href='http://www.rdocumentation.org/packages/sp/topics/SpatialPolygons'>SpatialPolygonsDataFrame</a></code> with columns:</p><ul>
-<li><p>ID_1</p></li>
-<li><p>NAME_1</p></li>
-<li><p>ID_2</p></li>
-<li><p>NAME_2</p></li>
-<li><p>AREA</p></li>
-</ul>
+<span class='co'># S3 method for default</span>
+<span class='fu'>xlim</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>ylim</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>ylim</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>any object with an extent understood by <code>spex</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>reserved for future methods</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Any projection metadata is dropped since this is a one-dimensional entity.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>sp</span>)
-<span class='fu'>plot</span>(<span class='no'>lux</span>)</div><div class='img'><img src='lux-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

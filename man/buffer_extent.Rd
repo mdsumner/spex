@@ -15,7 +15,7 @@ buffer_extent(e1, e2)
 Ensure a raster extent aligns to a clean divisor.
 }
 \details{
-This function is used to generate extents that have tidy boundaries, 
+This function is used to generate extents that have tidy boundaries,
 i.e. extents that align to a clean whole number like "10000".
 
 (We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.)

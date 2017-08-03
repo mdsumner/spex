@@ -1,4 +1,4 @@
-# spex 0.3.1
+# spex 0.4.0
 
 * new functions `xlim` and `ylim`, supporting anything understandable by `spex`
 
@@ -6,7 +6,7 @@
 
 * new `spex` support for sf objects
 
-* `spex()` with no input argument will return the extents of the current par 'usr' setting
+* `spex()` with no input argument will return the extents of the current par 'usr' setting (if only graphics devices had metadata registration for the space in use ...)
 
 * `polygonize`, `qm_rasterToPolygons`, and `qm_rasterToPolygons_sp` gain `na.rm` 
  argument to optionally remove any cells that are `NA` (in the first layer)

@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,6 +52,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -76,6 +83,17 @@
     </div>
 
     <div class="contents">
+    <div id="spex-0-4-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#spex-0-4-0" class="anchor"></a>spex 0.4.0</h1>
+<ul>
+<li><p>new functions <code>xlim</code> and <code>ylim</code>, supporting anything understandable by <code>spex</code></p></li>
+<li><p>new <code>extent</code> method for sf objects, otherwise missing in the core packages</p></li>
+<li><p>new <code>spex</code> support for sf objects</p></li>
+<li><p><code>spex()</code> with no input argument will return the extents of the current par ‘usr’ setting (if only graphics devices had metadata registration for the space in use …)</p></li>
+<li><p><code>polygonize</code>, <code>qm_rasterToPolygons</code>, and <code>qm_rasterToPolygons_sp</code> gain <code>na.rm</code> argument to optionally remove any cells that are <code>NA</code> (in the first layer)</p></li>
+</ul>
+</div>
     <div id="spex-0-3-0" class="section level1">
 <h1 class="hasAnchor">
 <a href="#spex-0-3-0" class="anchor"></a>spex 0.3.0</h1>
@@ -98,6 +116,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#spex-0-4-0">0.4.0</a></li>
         <li><a href="#spex-0-3-0">0.3.0</a></li>
         <li><a href="#spex-0-2-0">0.2.0</a></li>
       </ul>

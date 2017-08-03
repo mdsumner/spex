@@ -103,19 +103,18 @@ spex.sf <- function(x, crs, ...) {
 #' Any projection metadata is dropped since this is a one-dimensional entity. 
 #' @param x any object with an extent understood by `spex`
 #' @param ... reserved for future methods
-#'
 xlim <- function(x, ...) UseMethod("xlim")
 #' @export
-#' @name spex
+#' @name xlim
 xlim.default <- function(x, ...) {
   spx <- spex(x)
   c(raster::xmin(spx), raster::xmax(spx))
 }
 #' @export
-#' @name spex
+#' @name xlim
 ylim <- function(x, ...) UseMethod("ylim")
 #' @export
-#' @name spex
+#' @name xlim
 ylim.default <- function(x, ...) {
   spx <- spex(x)
   c(raster::ymin(spx), raster::ymax(spx))
