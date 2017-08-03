@@ -24,3 +24,10 @@ NULL
 #' library(sp)
 #' plot(lux)
 NULL
+
+#' A polygon data set with `sf` class. 
+#' 
+#' @name psf
+#' @docType data
+NULL
+

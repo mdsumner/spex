@@ -73,6 +73,7 @@ polygonize.RasterBrick <- qm_rasterToPolygons
 
 #' @name polygonize
 #' @export
+#' @importFrom raster values
 qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
   x0 <- polygonize(x, na.rm = na.rm)
   g <- unclass(x0[[attr(x0, "sf_column")]])
@@ -80,7 +81,7 @@ qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
      
   gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
   sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
-                               as.data.frame(unclass(x0))[!is.na(values(x[[1]])), , drop = FALSE], match.ID = FALSE)
+                               as.data.frame(unclass(x0))[!is.na(raster::values(x[[1]])), , drop = FALSE], match.ID = FALSE)
 }
 
 

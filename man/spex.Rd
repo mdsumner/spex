@@ -9,6 +9,14 @@
 \alias{spex.default}
 \alias{spex}
 \alias{spex.Extent}
+\alias{spex}
+\alias{spex.sf}
+\alias{spex}
+\alias{xlim.default}
+\alias{spex}
+\alias{ylim}
+\alias{spex}
+\alias{ylim.default}
 \title{spex}
 \usage{
 spex(x, ...)
@@ -16,6 +24,14 @@ spex(x, ...)
 \method{spex}{default}(x, crs, byid = FALSE, .id, ...)
 
 \method{spex}{Extent}(x, crs, ...)
+
+\method{spex}{sf}(x, crs, ...)
+
+\method{xlim}{default}(x, ...)
+
+ylim(x, ...)
+
+\method{ylim}{default}(x, ...)
 }
 \arguments{
 \item{x}{any object with a \code{\link[raster]{Extent}}}

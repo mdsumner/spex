@@ -1,4 +1,10 @@
-# spex dev
+# spex 0.3.1
+
+* new functions `xlim` and `ylim`, supporting anything understandable by `spex`
+
+* new `extent` method for sf objects, otherwise missing in the core packages
+
+* new `spex` support for sf objects
 
 * `spex()` with no input argument will return the extents of the current par 'usr' setting
 
