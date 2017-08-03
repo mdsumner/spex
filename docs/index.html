@@ -65,13 +65,17 @@
 <p>Spex provides a small set of functions for working with spatial data. These are</p>
 <ul>
 <li>
-<code>spex()</code> - a spatial extent with projection metadata</li>
+<code><a href="http://www.rdocumentation.org/packages/spex/topics/spex">spex()</a></code> - a spatial extent with projection metadata</li>
 <li>
-<code>polygonize()</code> - a fast quadmesh-based pixel-to-polygon translation</li>
+<code><a href="http://www.rdocumentation.org/packages/spex/topics/polygonize">polygonize()</a></code> - a fast quadmesh-based pixel-to-polygon translation</li>
 <li>
 <code>buffer_extent</code> - a convenience function for tidy extents</li>
+<li>
+<code>xlim</code>, <code>ylim</code> - convenience functions for the axes of an extent</li>
+<li>
+<code>extent</code> - convenience functions for sf objects</li>
 </ul>
-<p>Create a fully-fledged SpatialPolygonsDataFrame <em>extent</em> from any object understood by the ‘raster’ package function ‘extent()’. If the input has projection metadata it will be carried through to the output.</p>
+<p>Create a fully-fledged SpatialPolygonsDataFrame <em>extent</em> from any object understood by the ‘raster’ package function ‘extent()’. If the input has projection metadata it will be carried through to the output. The intention is to support any object from packages <code>sp</code>, <code>raster</code> and <code>sf</code>. If you want this to work on other types, <a href="https://github.com/mdsumner/spex/issues">create an issue and get in touch to discuss!</a>.</p>
 <p>The polygonization approach is faster than <code>rasterToPolygons</code>, and multi-layer rasters are converted to multi-column spatial data frames. This only does the pixel-to-polygon case. It provides an <code>sf</code> POLYGON data frame, but there is a version <code>qm_rasterToPolygons_sp</code> that returns a Spatial version.</p>
 <p>The “buffered extent” is used to create cleanly aligned extents, useful for generating exacting grid structures as raster or vector.</p>
 </div>
@@ -89,7 +93,7 @@
 <span class="kw">library</span>(raster)
 <span class="co">#&gt; Loading required package: sp</span>
 <span class="kw">data</span>(lux)
-(exlux &lt;-<span class="st"> </span><span class="kw">spex</span>(lux))
+(exlux &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/spex">spex</a></span>(lux))
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span>
@@ -100,7 +104,7 @@
 <span class="co">#&gt; max values  :   1</span>
 
 ## put an extent and a CRS together
-<span class="kw">spex</span>(<span class="kw"><a href="reference/extent.html">extent</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">crs =</span> <span class="st">"+proj=laea +ellps=WGS84"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/spex">spex</a></span>(<span class="kw"><a href="reference/extent.html">extent</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">crs =</span> <span class="st">"+proj=laea +ellps=WGS84"</span>)
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)</span>
@@ -113,14 +117,14 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spex)
 <span class="kw">library</span>(raster)
 r &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(volcano)
-tm &lt;-<span class="st"> </span><span class="kw">system.time</span>(p &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons</span>(r))
+tm &lt;-<span class="st"> </span><span class="kw">system.time</span>(p &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/polygonize">qm_rasterToPolygons</a></span>(r))
 
-p1 &lt;-<span class="st"> </span><span class="kw">polygonize</span>(r)
+p1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/polygonize">polygonize</a></span>(r)
 
 <span class="kw">identical</span>(p, p1)
 <span class="co">#&gt; [1] TRUE</span>
  
-p3 &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons_sp</span>(r)
+p3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/polygonize">qm_rasterToPolygons_sp</a></span>(r)
 <span class="kw">class</span>(p3)
 <span class="co">#&gt; [1] "SpatialPolygonsDataFrame"</span>
 <span class="co">#&gt; attr(,"package")</span>
@@ -137,7 +141,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons_sp</span>(
 
 <span class="kw">print</span>(tm)
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.230   0.103   0.333</span></code></pre></div>
+<span class="co">#&gt;   0.211   0.032   0.243</span></code></pre></div>
 <p>Create a buffered extent with whole-number aligned edges.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(spex)
 
@@ -170,7 +174,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons_sp</span>(
 <span class="co">#&gt; xmax        : 1.23 </span>
 <span class="co">#&gt; ymin        : 0 </span>
 <span class="co">#&gt; ymax        : 1</span>
-<span class="kw">spex</span>(psf)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/spex">spex</a></span>(psf)
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span>
@@ -179,7 +183,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">qm_rasterToPolygons_sp</span>(
 <span class="co">#&gt; names       : p </span>
 <span class="co">#&gt; min values  : 1 </span>
 <span class="co">#&gt; max values  : 1</span>
-<span class="kw">spex</span>(sf<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/st_crs">st_set_crs</a></span>(psf, <span class="dv">3031</span>))
+<span class="kw"><a href="http://www.rdocumentation.org/packages/spex/topics/spex">spex</a></span>(sf<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sf/topics/st_crs">st_set_crs</a></span>(psf, <span class="dv">3031</span>))
 <span class="co">#&gt; class       : SpatialPolygonsDataFrame </span>
 <span class="co">#&gt; features    : 1 </span>
 <span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span>

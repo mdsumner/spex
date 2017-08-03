@@ -10,8 +10,10 @@ Spex provides a small set of functions for working with spatial data. These are
 -   `spex()` - a spatial extent with projection metadata
 -   `polygonize()` - a fast quadmesh-based pixel-to-polygon translation
 -   `buffer_extent` - a convenience function for tidy extents
+-   `xlim`, `ylim` - convenience functions for the axes of an extent
+-   `extent` - convenience functions for sf objects
 
-Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood by the 'raster' package function 'extent()'. If the input has projection metadata it will be carried through to the output.
+Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood by the 'raster' package function 'extent()'. If the input has projection metadata it will be carried through to the output. The intention is to support any object from packages `sp`, `raster` and `sf`. If you want this to work on other types, [create an issue and get in touch to discuss!](https://github.com/mdsumner/spex/issues).
 
 The polygonization approach is faster than `rasterToPolygons`, and multi-layer rasters are converted to multi-column spatial data frames. This only does the pixel-to-polygon case. It provides an `sf` POLYGON data frame, but there is a version `qm_rasterToPolygons_sp` that returns a Spatial version.
 
@@ -88,7 +90,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.199   0.064   0.263
+#>   0.225   0.040   0.265
 ```
 
 Create a buffered extent with whole-number aligned edges.
