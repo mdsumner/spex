@@ -61,7 +61,9 @@ spex.default <- function(x, crs, byid = FALSE, .id, ...) {
   } else {
     p <- as(extent(x), 'SpatialPolygons')
   }
-  if (missing(.id)) .id <- deparse(substitute(x))
+  if (missing(.id)) {
+    .id <- sprintf("%s_extent", class(x)[1])
+  }
   crs(p) <- crs(x)
   SpatialPolygonsDataFrame(p, setNames(data.frame(1L), .id))
 }

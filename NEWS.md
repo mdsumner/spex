@@ -1,3 +1,7 @@
+# spex dev
+
+* better column name for resulting sp data frame
+
 # spex 0.4.0
 
 * new functions `xlim` and `ylim`, supporting anything understandable by `spex`
