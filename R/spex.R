@@ -72,7 +72,7 @@ spex.default <- function(x, crs, byid = FALSE, .id, ...) {
 #' @name spex
 spex.Extent <- function(x, crs, ...) {
   p <- as(extent(x), 'SpatialPolygons')
-  crs(p) <- crs
+  raster::crs(p) <- crs
   spex(p, ...)
 }
 
