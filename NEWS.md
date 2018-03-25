@@ -1,5 +1,7 @@
 # spex dev
 
+* A modest speed (~5X) up by careful use of R. 
+
 * better column name for resulting sp data frame
 
 # spex 0.4.0

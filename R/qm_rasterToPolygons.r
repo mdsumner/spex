@@ -38,14 +38,24 @@
 #' @export
 polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   ## create dense mesh of cell corner coordinates
-  qm <- quadmesh::quadmesh(x, na.rm = na.rm)
-  ## split the mesh and construct simple features POLYGONS (without checking them)
-  l <- lapply(split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4)), function(x) structure(list(matrix(x, ncol = 2)[c(1, 2, 3, 4, 1), ]), 
-                                                                                                      class = c("XY", "POLYGON", "sfg")))
+  qm <- quadmesh::quadmesh(x, z = NULL, na.rm = na.rm)
+  ## a dummy structure to copy
+  template <- structure(list(cbind(1:5, 0)), 
+            class = c("XY", "POLYGON", "sfg"))
+  spl <- split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4))
+  
+  l <- vector("list", length(spl))
+  
+ a <- template
+  for (i in seq_along(l)) {
+    l[[i]][[1L]][] <- spl[[i]][c(1, 2, 3, 4, 1, 
+                                 5, 6, 7, 8, 5)]  
+  }
   ## get all the layers off the raster
   sf1 <- raster::as.data.frame(x)
-  if (na.rm ) {
-    sf1 <- sf1[!is.na(raster::values(x[[1]])), , drop = FALSE]
+  
+  if (na.rm && dim(sf1)[2] < 2) {
+    sf1 <- sf1[!is.na(sf1[[1]]), , drop = FALSE]
   }
   ## add the geometry column
   #sf1[["geometry"]] <- sf::st_sfc(l)
@@ -73,7 +83,7 @@ polygonize.RasterBrick <- qm_rasterToPolygons
 
 #' @name polygonize
 #' @export
-#' @importFrom raster values
+#' @importFrom raster getValues
 qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
   x0 <- polygonize(x, na.rm = na.rm)
   g <- unclass(x0[[attr(x0, "sf_column")]])
@@ -81,7 +91,7 @@ qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
      
   gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
   sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
-                               as.data.frame(unclass(x0))[!is.na(raster::values(x[[1]])), , drop = FALSE], match.ID = FALSE)
+                               as.data.frame(unclass(x0))[!is.na(raster::getValues(x[[1]])), , drop = FALSE], match.ID = FALSE)
 }
 
 
