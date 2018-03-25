@@ -42,15 +42,15 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   ## a dummy structure to copy
   template <- structure(list(cbind(1:5, 0)), 
             class = c("XY", "POLYGON", "sfg"))
+  
+  ## TODO: speed up, this is the slow part
   spl <- split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4))
+  l <- lapply(spl, function(a) {
+    template[[1L]] <- 
+    cbind(a[c(1, 2, 3, 4, 1)], a[c(5, 6, 7, 8, 5)])
+    template
+    })
   
-  l <- vector("list", length(spl))
-  
- a <- template
-  for (i in seq_along(l)) {
-    l[[i]][[1L]][] <- spl[[i]][c(1, 2, 3, 4, 1, 
-                                 5, 6, 7, 8, 5)]  
-  }
   ## get all the layers off the raster
   sf1 <- raster::as.data.frame(x)
   
@@ -59,10 +59,14 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   }
   ## add the geometry column
   #sf1[["geometry"]] <- sf::st_sfc(l)
+  ex <- extent(x)
   sf1[["geometry"]] <- structure(l, n_empty = 0L, 
                                  crs = structure(list(epsg = NA_integer_, proj4string = raster::projection(x)), class = "crs"),
                                  precision = 0, 
-            bbox = structure(c(xmin = raster::xmin(x), ymin = raster::ymin(x), xmax = raster::xmax(x), ymax = raster::ymax(x)), 
+            bbox = structure(c(xmin = ex@xmin, 
+                               ymin = ex@ymin, 
+                               xmax = ex@xmax, 
+                               ymax = ex@ymax), 
                              class = "bbox"), class = c("sfc_POLYGON", "sfc"))
   ## cast as simple features object
   structure(sf1, sf_column = "geometry", agr = NULL, class = c("sf", "data.frame"))
@@ -91,7 +95,7 @@ qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
      
   gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
   sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
-                               as.data.frame(unclass(x0))[!is.na(raster::getValues(x[[1]])), , drop = FALSE], match.ID = FALSE)
+                               as.data.frame(unclass(x0))[!is.na(p[[1L]]), , drop = FALSE], match.ID = FALSE)
 }
 
 

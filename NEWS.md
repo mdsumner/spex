@@ -1,6 +1,6 @@
 # spex dev
 
-* A modest speed (~5X) up by careful use of R. 
+* A modest speed-up (up to 2X) by more careful use of R. 
 
 * better column name for resulting sp data frame
 
