@@ -24,7 +24,7 @@ d <- raster::rasterize(lux, raster::raster(lux, res = 0.01))
 test_that("we can also qm_raster here", {
   pd <- polygonize(d) 
   pd %>% 
-    expect_named(c("ID_1", "NAME_1", "ID_2", "NAME_2", "AREA", "geometry")) %>% 
+    expect_named(c("layer", "geometry")) %>% 
     expect_s3_class("sf")
   expect_equal(nrow(pd), 5694)
   pnad <- polygonize(d, na.rm = TRUE)

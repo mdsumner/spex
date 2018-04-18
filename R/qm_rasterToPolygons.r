@@ -4,8 +4,9 @@
 #' It's faster by turning off the checking done in the simple features package, but it's also faster
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
+#' Note that `na.rm` only applies to the first layer, get in touch if this is a problem. 
 #' @param x raster, brick or stack
-#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the populated cells
+#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the populated cells of the first layer
 #' @param ... arguments passed to methods, currently unused
 #'
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
@@ -52,9 +53,9 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
     })
   
   ## get all the layers off the raster
-  sf1 <- raster::as.data.frame(x)
+  sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
   
-  if (na.rm && dim(sf1)[2] < 2) {
+  if (na.rm) {
     sf1 <- sf1[!is.na(sf1[[1]]), , drop = FALSE]
   }
   ## add the geometry column
@@ -95,7 +96,7 @@ qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
      
   gl <- lapply(unlist(lapply(g, function(x) unclass(x)), recursive = FALSE), sp::Polygon)
   sp::SpatialPolygonsDataFrame(sp::SpatialPolygons(lapply(seq_along(gl), function(x) sp::Polygons(list(gl[[x]]), as.character(x))), proj4string = sp::CRS(raster::projection(x))), 
-                               as.data.frame(unclass(x0))[!is.na(p[[1L]]), , drop = FALSE], match.ID = FALSE)
+                               as.data.frame(unclass(x0)), match.ID = FALSE)
 }
 
 
