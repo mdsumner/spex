@@ -60,18 +60,17 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   ## TODO: speed up, this is the slow part
   spl <- split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4))
   ## remove the *common-missing* quads here
-  l <- lapply(spl[!na_all], function(a) {
+  if (na_rm) {
+    sf1 <- sf1[!na_all, , drop = FALSE]
+    spl <- spl[!na_all]
+    
+  }
+  l <- lapply(spl, function(a) {
     template[[1L]] <- 
     cbind(a[c(1, 2, 3, 4, 1)], a[c(5, 6, 7, 8, 5)])
     template
     })
   
-  
-  if (na_rm) {
-    sf1 <- sf1[!na_all, , drop = FALSE]
-  }
-  ## add the geometry column
-  #sf1[["geometry"]] <- sf::st_sfc(l)
   ex <- extent(x)
   sf1[["geometry"]] <- structure(l, n_empty = 0L, 
                                  crs = structure(list(epsg = NA_integer_, proj4string = raster::projection(x)), class = "crs"),
