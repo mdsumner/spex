@@ -4,10 +4,9 @@
 #' It's faster by turning off the checking done in the simple features package, but it's also faster
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
-#' Note that `na.rm` adds efficiency only if a fair proportion of the cells are NA, and so is reduced if 
-#' these aren't shared over layers.  
 #' @param x raster, brick or stack
-#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the cells that are non-NA across all layers
+#' @param na.rm defaults to `TRUE` and will polygonize only the cells that are non-NA across all layers, 
+#' set to `FALSE` to not remove any cells
 #' @param ... arguments passed to methods, currently unused
 #'
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
@@ -38,7 +37,7 @@
 #' @name polygonize
 #' @aliases qm_rasterToPolygons qm_rasterToPolygons_sp
 #' @export
-polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
+polygonize.RasterLayer <- function(x, na.rm = TRUE, ...) {
   ## get all the layers off the raster
   sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
   
@@ -100,7 +99,7 @@ polygonize.RasterBrick <- qm_rasterToPolygons
 #' @name polygonize
 #' @export
 #' @importFrom raster getValues
-qm_rasterToPolygons_sp <- function(x, na.rm = FALSE, ...) {
+qm_rasterToPolygons_sp <- function(x, na.rm = TRUE, ...) {
   x0 <- polygonize(x, na.rm = na.rm)
   g <- unclass(x0[[attr(x0, "sf_column")]])
   x0[[attr(x0, "sf_column")]] <- NULL
