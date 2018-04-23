@@ -31,7 +31,7 @@ qm_rasterToPolygons_sp(x, na.rm = FALSE, ...)
 \arguments{
 \item{x}{raster, brick or stack}
 
-\item{na.rm}{defaults to \code{FALSE}, if \code{TRUE} will polygonize only the populated cells of the first layer}
+\item{na.rm}{defaults to \code{FALSE}, if \code{TRUE} will polygonize only the cells that are non-NA across all layers}
 
 \item{...}{arguments passed to methods, currently unused}
 }
@@ -44,7 +44,8 @@ It's faster by turning off the checking done in the simple features package, but
 than raster because it uses a dense mesh to generate the coordinates.
 }
 \details{
-Note that \code{na.rm} only applies to the first layer, get in touch if this is a problem.
+Note that \code{na.rm} adds efficiency only if a fair proportion of the cells are NA, and so is reduced if
+these aren't shared over layers.
 }
 \section{Warning}{
 

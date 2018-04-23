@@ -4,9 +4,10 @@
 #' It's faster by turning off the checking done in the simple features package, but it's also faster
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
-#' Note that `na.rm` only applies to the first layer, get in touch if this is a problem. 
+#' Note that `na.rm` adds efficiency only if a fair proportion of the cells are NA, and so is reduced if 
+#' these aren't shared over layers.  
 #' @param x raster, brick or stack
-#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the populated cells of the first layer
+#' @param na.rm defaults to `FALSE`, if `TRUE` will polygonize only the cells that are non-NA across all layers
 #' @param ... arguments passed to methods, currently unused
 #'
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
@@ -38,6 +39,18 @@
 #' @aliases qm_rasterToPolygons qm_rasterToPolygons_sp
 #' @export
 polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
+  ## get all the layers off the raster
+  sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
+  
+  na_rm <- na.rm
+  if (na.rm && raster::nlayers(x) > 1) {
+    na_all <- Reduce(`&`, lapply(sf1, function(x) is.na(x)))
+    na.rm <- FALSE
+  } else {
+    na_all <- is.na(sf1[[1]])
+    
+  }
+  
   ## create dense mesh of cell corner coordinates
   qm <- quadmesh::quadmesh(x, z = NULL, na.rm = na.rm)
   ## a dummy structure to copy
@@ -46,17 +59,16 @@ polygonize.RasterLayer <- function(x, na.rm = FALSE, ...) {
   
   ## TODO: speed up, this is the slow part
   spl <- split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4))
-  l <- lapply(spl, function(a) {
+  ## remove the *common-missing* quads here
+  l <- lapply(spl[!na_all], function(a) {
     template[[1L]] <- 
     cbind(a[c(1, 2, 3, 4, 1)], a[c(5, 6, 7, 8, 5)])
     template
     })
   
-  ## get all the layers off the raster
-  sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
   
-  if (na.rm) {
-    sf1 <- sf1[!is.na(sf1[[1]]), , drop = FALSE]
+  if (na_rm) {
+    sf1 <- sf1[!na_all, , drop = FALSE]
   }
   ## add the geometry column
   #sf1[["geometry"]] <- sf::st_sfc(l)
