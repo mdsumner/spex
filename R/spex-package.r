@@ -31,3 +31,9 @@ NULL
 #' @docType data
 NULL
 
+#' A raster data set with southern ocean sea ice concentration
+#' 
+#' When first created this data set was from 2018-04-28. 
+#' @name ice
+#' @docType data
+NULL
