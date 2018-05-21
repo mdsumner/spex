@@ -5,7 +5,7 @@
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
 #' @param x raster, brick or stack
-#' @param na.rm defaults to `TRUE` and will polygonize only the cells that are non-NA across all layers, 
+#' @param na.rm defaults to `TRUE` and will polygonize all the cells that are non-NA in any layer, 
 #' set to `FALSE` to not remove any cells
 #' @param ... arguments passed to methods, currently unused
 #'
@@ -41,29 +41,39 @@ polygonize.RasterLayer <- function(x, na.rm = TRUE, ...) {
   ## get all the layers off the raster
   sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
   
-  na_rm <- na.rm
-  if (na.rm && raster::nlayers(x) > 1) {
-    na_all <- Reduce(`&`, lapply(sf1, function(x) is.na(x)))
-    na.rm <- FALSE
+  if (raster::nlayers(x) > 1) {
+    qm <- quadmesh::quadmesh(x, na.rm = FALSE)
   } else {
-    na_all <- is.na(sf1[[1]])
+    qm <- quadmesh::quadmesh(x, z = x[[1]], na.rm = na.rm)
+  }
+  ## TODO: speed up, this is the slow part
+  ## remove the *common-missing* quads here
+  IB <- qm$ib
+
+  na_all <- rep(FALSE, nrow(sf1))
+  
+  if (na.rm) {
+    if (raster::nlayers(x) > 1){
+    na_all <- Reduce(`&`, lapply(sf1, function(x) is.na(x)))
+    IB <- IB[, !na_all]
+    sf1 <- sf1[!na_all, , drop = FALSE]
     
+    } else {
+     sf1 <- sf1[!is.na(raster::values(x[[1]])), , drop = FALSE]  
+    }
   }
   
+  
+
   ## create dense mesh of cell corner coordinates
-  qm <- quadmesh::quadmesh(x, z = NULL, na.rm = na.rm)
+  
   ## a dummy structure to copy
   template <- structure(list(cbind(1:5, 0)), 
             class = c("XY", "POLYGON", "sfg"))
   
-  ## TODO: speed up, this is the slow part
-  spl <- split(t(qm$vb[1:2, qm$ib]), rep(seq_len(ncol(qm$ib)), each = 4))
-  ## remove the *common-missing* quads here
-  if (na_rm) {
-    sf1 <- sf1[!na_all, , drop = FALSE]
-    spl <- spl[!na_all]
+  spl <- split(t(qm$vb[1:2, IB]), rep(seq_len(ncol(IB)), each = 4))
+  #spl <- spl[!na_all]
     
-  }
   l <- lapply(spl, function(a) {
     template[[1L]] <- 
     cbind(a[c(1, 2, 3, 4, 1)], a[c(5, 6, 7, 8, 5)])

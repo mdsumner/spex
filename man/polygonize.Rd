@@ -16,22 +16,23 @@
 \alias{qm_rasterToPolygons_sp}
 \title{Create a polygon layer from a raster.}
 \usage{
-\method{polygonize}{RasterLayer}(x, na.rm = FALSE, ...)
+\method{polygonize}{RasterLayer}(x, na.rm = TRUE, ...)
 
 polygonize(x, ...)
 
-qm_rasterToPolygons(x, na.rm = FALSE, ...)
+qm_rasterToPolygons(x, na.rm = TRUE, ...)
 
-\method{polygonize}{RasterStack}(x, na.rm = FALSE, ...)
+\method{polygonize}{RasterStack}(x, na.rm = TRUE, ...)
 
-\method{polygonize}{RasterBrick}(x, na.rm = FALSE, ...)
+\method{polygonize}{RasterBrick}(x, na.rm = TRUE, ...)
 
-qm_rasterToPolygons_sp(x, na.rm = FALSE, ...)
+qm_rasterToPolygons_sp(x, na.rm = TRUE, ...)
 }
 \arguments{
 \item{x}{raster, brick or stack}
 
-\item{na.rm}{defaults to \code{FALSE}, if \code{TRUE} will polygonize only the cells that are non-NA across all layers}
+\item{na.rm}{defaults to \code{TRUE} and will polygonize only the cells that are non-NA across all layers,
+set to \code{FALSE} to not remove any cells}
 
 \item{...}{arguments passed to methods, currently unused}
 }
@@ -42,10 +43,6 @@ simple features POLYGON layer, or SpatialPolygonsDataFrame
 This method uses the quadmesh to generate the coordinates, and creates a simple features layer.
 It's faster by turning off the checking done in the simple features package, but it's also faster
 than raster because it uses a dense mesh to generate the coordinates.
-}
-\details{
-Note that \code{na.rm} adds efficiency only if a fair proportion of the cells are NA, and so is reduced if
-these aren't shared over layers.
 }
 \section{Warning}{
 
