@@ -22,3 +22,6 @@ SpatialPolygonsDataFrame
 Create a circular polygon using a latitude value in a map projection. The longitude range can be
 modified from global to give a portion of a circle.
 }
+\examples{
+latitudecircle()
+}

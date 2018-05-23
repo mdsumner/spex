@@ -12,7 +12,7 @@
 #' @return simple features POLYGON layer, or SpatialPolygonsDataFrame
 #' @export
 #' @section Warning: 
-#' Please don't try this on large rasters, use quadmesh itself for efficient vector based use of a raster's
+#' Please don't try this on large rasters (> ~1e5 cells), use quadmesh itself for efficient vector based use of a raster's
 #' coordinates. It will work reasonably on largish grids, but you won't want to try plotting them or perform
 #' operations on them, simple features is incredibly wasteful for objects like this. 
 #' @examples

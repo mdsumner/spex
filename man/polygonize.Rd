@@ -31,7 +31,7 @@ qm_rasterToPolygons_sp(x, na.rm = TRUE, ...)
 \arguments{
 \item{x}{raster, brick or stack}
 
-\item{na.rm}{defaults to \code{TRUE} and will polygonize only the cells that are non-NA across all layers,
+\item{na.rm}{defaults to \code{TRUE} and will polygonize all the cells that are non-NA in any layer,
 set to \code{FALSE} to not remove any cells}
 
 \item{...}{arguments passed to methods, currently unused}
@@ -46,7 +46,7 @@ than raster because it uses a dense mesh to generate the coordinates.
 }
 \section{Warning}{
 
-Please don't try this on large rasters, use quadmesh itself for efficient vector based use of a raster's
+Please don't try this on large rasters (> ~1e5 cells), use quadmesh itself for efficient vector based use of a raster's
 coordinates. It will work reasonably on largish grids, but you won't want to try plotting them or perform
 operations on them, simple features is incredibly wasteful for objects like this.
 }
