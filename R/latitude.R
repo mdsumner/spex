@@ -13,7 +13,7 @@
 #' @examples
 #' latitudecircle()
 latitudecircle <- function(latitude = 0, proj = "+proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84", lonlim = c(-180, 180)) {
-  raster::spPolygons(proj4::project(cbind(seq(lonlim[1], lonlim[2], length = 1000), latitude), proj), crs = proj, attr  = data.frame(latitude = latlim))
+  raster::spPolygons(proj4::project(cbind(seq(lonlim[1], lonlim[2], length = 1000), latitude), proj), crs = proj, attr  = data.frame(latitude = latitude))
 }
 
 #' Latitude mask for polar raster
