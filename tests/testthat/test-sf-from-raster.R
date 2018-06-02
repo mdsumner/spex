@@ -29,3 +29,10 @@ test_that("we can also qm_raster here", {
   pnad <- polygonize(d, na.rm = TRUE)
   expect_equal(nrow(pnad), 3195)
 })
+
+
+test_that("we get polygons from an empty raster", {
+  p <- polygonize(raster(nrows = 2, ncols = 3))
+  expect_true(nrow(p) > 0)
+  expect_that(nrow(p), equals(6))
+})
