@@ -4,6 +4,10 @@
 #' It's faster by turning off the checking done in the simple features package, but it's also faster
 #' than raster because it uses a dense mesh to generate the coordinates. 
 #'
+#' If `na.rm` is `TRUE` (the default) only cells that are not-NA across all
+#' layers are created. An exception to this is the empty raster `raster::hasValues(x)` is `FALSE`
+#' and all the cells will be turned into polygons - since this is what the whole 
+#' scene is really for, easily creating polygons from a grid. 
 #' @param x raster, brick or stack
 #' @param na.rm defaults to `TRUE` and will polygonize all the cells that are non-NA in any layer, 
 #' set to `FALSE` to not remove any cells
@@ -40,7 +44,10 @@
 polygonize.RasterLayer <- function(x, na.rm = TRUE, ...) {
   ## get all the layers off the raster
   sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
-  
+  if (!hasValues(x) & na.rm) {
+    warning("raster has no values, ignoring 'na.rm = TRUE'")
+    na.rm <- FALSE
+  }
   if (raster::nlayers(x) > 1) {
     qm <- quadmesh::quadmesh(x, na.rm = FALSE)
   } else {
