@@ -21,5 +21,6 @@ Latitude mask for polar raster
 }
 \examples{
  
+library(raster)
 plot(latmask(ice, -60))
 }

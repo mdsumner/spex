@@ -44,6 +44,12 @@ This method uses the quadmesh to generate the coordinates, and creates a simple 
 It's faster by turning off the checking done in the simple features package, but it's also faster
 than raster because it uses a dense mesh to generate the coordinates.
 }
+\details{
+If \code{na.rm} is \code{TRUE} (the default) only cells that are not-NA across all
+layers are created. An exception to this is the empty raster \code{raster::hasValues(x)} is \code{FALSE}
+and all the cells will be turned into polygons - since this is what the whole
+scene is really for, easily creating polygons from a grid.
+}
 \section{Warning}{
 
 Please don't try this on large rasters (> ~1e5 cells), use quadmesh itself for efficient vector based use of a raster's

@@ -1,5 +1,5 @@
 language: R
-sudo: false
+sudo: true
 
 r:
   - release
@@ -11,3 +11,6 @@ dist: trusty
 after_success:
   - Rscript -e 'covr::codecov()'
   
+before_install:
+  - sudo apt-get install --yes libproj-dev
+  - Rscript -e 'update.packages(ask = FALSE)'

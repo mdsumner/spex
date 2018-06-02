@@ -26,6 +26,7 @@ latitudecircle <- function(latitude = 0, proj = "+proj=stere +lon_0=0 +lat_0=-90
 #' @export
 #'  
 #' @examples  
+#' library(raster)
 #' plot(latmask(ice, -60))
 latmask <- function(x, latitude = 0, southern = TRUE) {
   if (raster::isLonLat(x))  {
