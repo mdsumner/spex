@@ -5,6 +5,8 @@ r:
   - release
   - devel
   
+cache: packages
+
 dist: trusty
 
 
