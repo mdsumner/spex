@@ -6,9 +6,9 @@
 
 * Improved handling of `na.rm`, also now TRUE by default. #13 Thanks to Adriano Fantini.
 
-* A modest speed-up (up to 2X) by more careful use of R. 
+* A modest speed-up (up to 2X) for `polygonize` by more careful use of R. 
 
-* better column name for resulting sp data frame
+* better column name for resulting Spatial data frame
 
 # spex 0.4.0
 
