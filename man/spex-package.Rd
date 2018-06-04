@@ -5,7 +5,12 @@
 \alias{spex-package}
 \title{spex}
 \description{
-spex
+Tools for spatial extents that are agnostic regarding format (i.e. \code{sp},
+\code{sf}, or \code{raster}). These functions fill some of the gaps within and between
+these packages for dealing with object extents in flexible ways. Generally,
+spex considers extents of raster cells, and extents of objects as first-class
+objects (with projection metadata). and provides helpers for  latitudinal
+boundaries within projected data.
 }
 \section{Spatial Extent}{
 

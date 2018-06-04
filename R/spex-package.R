@@ -1,5 +1,12 @@
 #' spex
 #'
+#' Tools for spatial extents that are agnostic regarding format (i.e. `sp`,
+#' `sf`, or `raster`). These functions fill some of the gaps within and between
+#' these packages for dealing with object extents in flexible ways. Generally,
+#' spex considers extents of raster cells, and extents of objects as first-class
+#' objects (with projection metadata). and provides helpers for  latitudinal
+#' boundaries within projected data.
+
 #' @name spex-package
 #' @section Spatial Extent:
 #' \tabular{ll}{
