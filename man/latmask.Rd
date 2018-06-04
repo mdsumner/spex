@@ -4,7 +4,7 @@
 \alias{latmask}
 \title{Latitude mask for polar raster}
 \usage{
-latmask(x, latitude = 0, southern = TRUE)
+latmask(x, latitude = 0, southern = TRUE, trim = FALSE, ...)
 }
 \arguments{
 \item{x}{a raster layer}
@@ -12,6 +12,10 @@ latmask(x, latitude = 0, southern = TRUE)
 \item{latitude}{maximum latitude  (effectively a minimum latitude if \code{southern = FALSe})}
 
 \item{southern}{flag for whether south-polar context is used, default is \code{TRUE}}
+
+\item{trim}{if \code{TRUE} runs \code{raster::trim} on the result, to remove \code{NA} margin}
+
+\item{...}{ignored currently}
 }
 \value{
 RasterLayer
@@ -23,4 +27,5 @@ Latitude mask for polar raster
  
 library(raster)
 plot(latmask(ice, -60))
+plot(latmask(ice, -60, trim = TRUE))
 }
