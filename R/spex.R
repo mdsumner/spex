@@ -98,6 +98,7 @@ spex.sf <- function(x, crs, ...) {
 #' Any projection metadata is dropped since this is a one-dimensional entity. 
 #' @param x any object with an extent understood by `spex`
 #' @param ... reserved for future methods
+#' @export
 xlim <- function(x, ...) UseMethod("xlim")
 #' @export
 #' @name xlim

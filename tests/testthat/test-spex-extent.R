@@ -17,6 +17,9 @@ test_that("extent of anything", {
   expect_equal(raster::xmax(spex(psf, "+")), 1.23)
   
   expect_equal(raster::extent(spex()) , raster::extent(0, 1, 0, 1))
+  
+  expect_equal(xlim(ice), c(-3950000,  3950000))
+  expect_equal(ylim(ice), c(-3950000,  4350000))
 })
 
 library(raster)
