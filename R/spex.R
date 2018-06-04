@@ -37,13 +37,6 @@
 #'
 #' ## put an extent and a CRS together
 #' spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
-#' \dontrun{
-#'  ## library(rgdal)
-#'  ## p4 <- "+proj=laea +ellps=WGS84"
-#'  ## plot(spTransform(lux, p4))
-#'  ## warning, this is just 4 coordinates
-#'  ## plot(spTransform(exlux, p4), add = TRUE)
-#' }
 #' @export
 #' @seealso This pattern is displayed in the example code for \code{\link[raster]{cover}}.
 spex <- function(x, ...) {

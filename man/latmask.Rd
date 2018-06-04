@@ -21,11 +21,24 @@ latmask(x, latitude = 0, southern = TRUE, trim = FALSE, ...)
 RasterLayer
 }
 \description{
-Latitude mask for polar raster
+Mask out values based on latitude for a raster. This works by finding all cells at
+latitudes less than \code{latitude} and setting them to missing. If \code{southern = FALSE}
+the inequality is reversed, and all cells at latitudes greater than \code{latitude} are
+masked out.
+}
+\details{
+The \code{trim} option allows for the result to be reduced to the common bounding box
+within which any row or column has a non-missing value.
 }
 \examples{
  
 library(raster)
 plot(latmask(ice, -60))
 plot(latmask(ice, -60, trim = TRUE))
+ice[!ice > 0] <- NA
+plot(ice)
+plot(latmask(ice, -55, trim = TRUE))
+}
+\seealso{
+\link[raster:trim]{raster::trim}, \link{latitudecircle}
 }

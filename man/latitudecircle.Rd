@@ -5,23 +5,39 @@
 \title{Latitude circle}
 \usage{
 latitudecircle(latitude = 0,
-  proj = "+proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84",
-  lonlim = c(-180, 180))
+  crs = "+proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84",
+  lonlim = c(-180, 180), nverts = 1800)
 }
 \arguments{
 \item{latitude}{latitude value for the boundary, defaults to 0}
 
-\item{proj}{map projection to use, defaults to southern Polar Stereographic true scale at -71S}
+\item{crs}{map projection to use, defaults to southern Polar Stereographic true scale at -71S}
 
 \item{lonlim}{the range of longitude to use, defaults to entire globe}
+
+\item{nverts}{total number of vertices to use, see Details}
 }
 \value{
 SpatialPolygonsDataFrame
 }
 \description{
-Create a circular polygon using a latitude value in a map projection. The longitude range can be
-modified from global to give a portion of a circle.
+Create a circular polygon using a latitude value in a map projection. The
+longitude range can be modified from global to give a portion of a circle.
+}
+\details{
+The argument \code{nverts} controls the total number of vertices of the circle
+within a linearly within the \code{lonlim} range of longitudes at \code{latitude}
+
+This is for use on classic polar projections centred on the north or the
+south pole, particularly Polar Stereographic and Lambert Azimuthal Equal Area
+but will also work with some caveats on other families and situations. We
+have not explored this more general use. Feel free to contact the maintainer
+if you have interest in less typical usage or find problems.
 }
 \examples{
-latitudecircle()
+latitudecircle(seq(0, -65, by = -5))
+library(raster)
+plot(ice)
+circ <- latitudecircle(-71, crs = projection(ice))
+plot(circ, add = TRUE)
 }

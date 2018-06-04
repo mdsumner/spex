@@ -1,5 +1,6 @@
-# spex dev
+# spex 0.5.0
 
+* New latitude functions `latitudecircle` to build a polar circle
 * Now return all cells as polygons if raster has no values. 
 
 * Improved handling of `na.rm`, also now TRUE by default. #13 Thanks to Adriano Fantini.
