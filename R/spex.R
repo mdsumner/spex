@@ -54,7 +54,7 @@ spex <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
 }
 parse_leaf_extent <- function(x) {
   if (missing(x)) {
-    x <- try(readLines("clipboard"), silent = TRUE)
+    x <- try(readLines("clipboard", warn = FALSE), silent = TRUE)
     if (inherits(x, "try-error")) {
       stop("cannot read from clipboard")
     }
