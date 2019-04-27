@@ -1,5 +1,6 @@
-^.*\.Rproj$
+^spex\.Rproj$
 ^\.Rproj\.user$
+^.*\.Rproj$
 ^data-raw$
 ^CONDUCT\.md$
 ^README\.Rmd$

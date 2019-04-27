@@ -5,15 +5,8 @@
 \alias{polygonize.RasterLayer}
 \alias{qm_rasterToPolygons}
 \alias{qm_rasterToPolygons_sp}
-\alias{polygonize}
-\alias{polygonize}
-\alias{qm_rasterToPolygons}
-\alias{polygonize}
 \alias{polygonize.RasterStack}
-\alias{polygonize}
 \alias{polygonize.RasterBrick}
-\alias{polygonize}
-\alias{qm_rasterToPolygons_sp}
 \title{Create a polygon layer from a raster.}
 \usage{
 \method{polygonize}{RasterLayer}(x, na.rm = TRUE, ...)

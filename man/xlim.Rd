@@ -2,11 +2,8 @@
 % Please edit documentation in R/spex.R
 \name{xlim}
 \alias{xlim}
-\alias{xlim}
 \alias{xlim.default}
-\alias{xlim}
 \alias{ylim}
-\alias{xlim}
 \alias{ylim.default}
 \title{Axis ranges from extent}
 \usage{

@@ -2,51 +2,39 @@
 % Please edit documentation in R/spex.R
 \name{spex}
 \alias{spex}
-\alias{spex}
 \alias{spex.default}
-\alias{spex}
 \alias{spex.Extent}
-\alias{spex}
 \alias{spex.sf}
 \title{Polygon extent}
 \usage{
-spex(x, ...)
+spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 
-\method{spex}{default}(x, crs, byid = FALSE, .id, ...)
+\method{spex}{default}(x, crs, byid = FALSE, .id, ...,
+  clipboard = FALSE)
 
-\method{spex}{Extent}(x, crs, ...)
+\method{spex}{Extent}(x, crs, byid = FALSE, .id, ...,
+  clipboard = FALSE)
 
-\method{spex}{sf}(x, crs, ...)
+\method{spex}{sf}(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 }
 \arguments{
 \item{x}{any object with a \code{\link[raster]{Extent}}}
-
-\item{...}{arguments for methods}
 
 \item{crs}{a projection string}
 
 \item{byid}{return a separate object for every input sub-object (not yet implemented)}
 
 \item{.id}{optional name for output attribute name}
+
+\item{...}{arguments for methods}
+
+\item{clipboard}{WIP this special-case allows x to be the result of the leafem clipboard copy process}
 }
 \value{
 'SpatialPolygonsDataFrame'
 }
 \description{
 Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
-}
-\details{
-Called with no arguments will return the extent of the current 'par("usr")' setting.
-This function is to replace a common pattern in the 'sp'-'raster' family which is
-\itemize{
-\item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
-\item coerce the Extent to \code{\link[sp]{SpatialPolygons}}
-\item restore the 'CRS', the "coordinate reference system", i.e. projection metadata
-\item elevate the object to be a \code{\link[sp]{SpatialPolygonsDataFrame}}.
-}
-
-In short, this pattern exists because there is no projection metadata stored
-with either sp''s \code{\link[sp]{bbox}} or 'raster''s \code{\link[raster]{Extent}}.
 }
 \section{Warning}{
  Please note that an extent converted to polygons consists

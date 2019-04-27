@@ -3,6 +3,15 @@
 #' Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
 #'
 #' Called with no arguments will return the extent of the current 'par("usr")' setting. 
+#' 
+#' Called with `clipboard = TRUE` and `x` will be treated as the JSON-ic output of the clipboard copy from 
+#' leafem (WIP). If x is missing, it will be attempted to be read from the clipboard. Clipboard read cannot
+#' work on RStudio Server, so we allow the text value to be passed in. 
+#' I.e. `spex(clipboard = TRUE)` will
+#' read from the clipboard, `spex(tx, clipboard = TRUE)` will read from tx with value like 
+#' '{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...'
+#' 
+#' 
 #' This function is to replace a common pattern in the 'sp'-'raster' family which is
 #' \itemize{
 #' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
@@ -19,6 +28,7 @@
 #' @param .id optional name for output attribute name
 #' @param ... arguments for methods
 #' @param crs a projection string
+#' @param clipboard WIP this special-case allows x to be the result of the leafem clipboard copy process
 #' @importFrom methods as
 #' @importFrom raster crs<- crs extent
 #' @importFrom sp SpatialPolygonsDataFrame
@@ -39,13 +49,30 @@
 #' spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 #' @export
 #' @seealso This pattern is displayed in the example code for \code{\link[raster]{cover}}.
-spex <- function(x, ...) {
+spex <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   UseMethod("spex")
 }
-
+parse_leaf_extent <- function(x) {
+  if (missing(x)) {
+    x <- try(readLines("clipboard"), silent = TRUE)
+    if (inherits(x, "try-error")) {
+      stop("cannot read from clipboard")
+    }
+    if (!grepl('^\\{"\\_southWest', x)) stop("clipboard contents does not look like leafem copy output")
+  }
+  #'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_northEast":{"lat":6.937332868878443,"lng":31.904296875000004}}'
+  parts <- unlist(strsplit(x, ":")[[1]][c(4, 7, 3, 6)])
+  lon <- as.numeric(unlist(lapply(strsplit(parts[1:2], "\\}"), "[", 1)))
+  lat <- as.numeric(unlist(lapply(strsplit(parts[3:4], ","), "[", 1)))
+  spex(raster::extent(lon, lat), crs = "+proj=longlat +datum=WGS84")
+}
 #' @export
 #' @name spex
-spex.default <- function(x, crs, byid = FALSE, .id, ...) {
+spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
+  if (clipboard) {
+    out <- if (missing(x)) parse_leaf_extent() else parse_leaf_extent(x)
+    return(out)
+  }
   if (missing(crs)) crs <- NULL
    if (missing(x)) return(spex(raster::extent(graphics::par("usr")), crs = crs))
     if (byid) {
@@ -63,7 +90,7 @@ spex.default <- function(x, crs, byid = FALSE, .id, ...) {
 
 #' @export
 #' @name spex
-spex.Extent <- function(x, crs, ...) {
+spex.Extent <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   p <- as(extent(x), 'SpatialPolygons')
   raster::crs(p) <- crs
   spex(p, ...)
@@ -87,7 +114,7 @@ setMethod(f = "extent", signature = "sf", definition = extent_sf)
 
 #' @export
 #' @name spex
-spex.sf <- function(x, crs, ...) {
+spex.sf <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   spex(extent(x), attr(x[[attr(x, "sf_column")]], "crs")$proj4string)
 }
 

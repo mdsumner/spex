@@ -2,11 +2,8 @@
 % Please edit documentation in R/buffer_extent.R
 \name{as_double}
 \alias{as_double}
-\alias{as_double}
 \alias{as_double.Extent}
-\alias{as_double}
 \alias{as_integer}
-\alias{as_double}
 \alias{as_integer.Extent}
 \title{Atomic vector extent}
 \usage{

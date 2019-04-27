@@ -1,3 +1,8 @@
+# spex 0.5.0.9001
+
+* New `spex(clipboard = TRUE/FALSE)` argument to take advantage of leafem copy extent (WIP). 
+
+
 # spex 0.5.0
 
 * New latitude functions `latitudecircle` to build a polar circle. 
