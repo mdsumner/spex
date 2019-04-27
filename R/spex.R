@@ -58,7 +58,9 @@ parse_leaf_extent <- function(x) {
     if (inherits(x, "try-error")) {
       stop("cannot read from clipboard")
     }
-    if (!grepl('^\\{"\\_southWest', x)) stop("clipboard contents does not look like leafem copy output")
+    
+               
+    if (!grepl("^\\{", x)) stop("clipboard contents does not look like leafem copy output")
   }
   #'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_northEast":{"lat":6.937332868878443,"lng":31.904296875000004}}'
   parts <- unlist(strsplit(x, ":")[[1]][c(4, 7, 3, 6)])
