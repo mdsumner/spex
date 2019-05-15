@@ -1,5 +1,7 @@
 # spex 0.5.0.9001
 
+* Add new features for basic list, data frame or matrix input. 
+
 * New `spex(clipboard = TRUE/FALSE)` argument to take advantage of leafem copy extent (WIP). 
 
 

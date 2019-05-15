@@ -1,8 +1,27 @@
+parse_leaf_extent <- function(x) {
+  if (missing(x)) {
+    x <- try(readLines("clipboard", warn = FALSE), silent = TRUE)
+    if (inherits(x, "try-error")) {
+      stop("cannot read from clipboard")
+    }
+    
+    
+    if (!grepl("^'\\{\"\\_southWest", x)) stop("clipboard contents does not look like leafem copy output")
+  }
+  #'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_northEast":{"lat":6.937332868878443,"lng":31.904296875000004}}'
+  parts <- unlist(strsplit(x, ":")[[1]][c(4, 7, 3, 6)])
+  lon <- as.numeric(unlist(lapply(strsplit(parts[1:2], "\\}"), "[", 1)))
+  lat <- as.numeric(unlist(lapply(strsplit(parts[3:4], ","), "[", 1)))
+  spex(raster::extent(lon, lat), crs = "+proj=longlat +datum=WGS84")
+}
+
 #' Polygon extent
 #'
 #' Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
 #'
 #' Called with no arguments will return the extent of the current 'par("usr")' setting. 
+#' 
+#' Called with a matrix, list, or data frame it will create an extent from a two columned thing. 
 #' 
 #' Called with `clipboard = TRUE` and `x` will be treated as the JSON-ic output of the clipboard copy from 
 #' leafem (WIP). If x is missing, it will be attempted to be read from the clipboard. Clipboard read cannot
@@ -21,7 +40,7 @@
 #' }
 #'
 #' In short, this pattern exists because there is no projection metadata stored
-#'  with either sp''s \code{\link[sp]{bbox}} or 'raster''s \code{\link[raster]{Extent}}.
+#'  with either sp's \code{\link[sp]{bbox}} or raster's \code{\link[raster]{Extent}}.
 #'
 #' @param x any object with a \code{\link[raster]{Extent}}
 #' @param byid return a separate object for every input sub-object (not yet implemented)
@@ -52,22 +71,7 @@
 spex <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   UseMethod("spex")
 }
-parse_leaf_extent <- function(x) {
-  if (missing(x)) {
-    x <- try(readLines("clipboard", warn = FALSE), silent = TRUE)
-    if (inherits(x, "try-error")) {
-      stop("cannot read from clipboard")
-    }
-    
-               
-    if (!grepl("^'\\{\"\\_southWest", x)) stop("clipboard contents does not look like leafem copy output")
-  }
-  #'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_northEast":{"lat":6.937332868878443,"lng":31.904296875000004}}'
-  parts <- unlist(strsplit(x, ":")[[1]][c(4, 7, 3, 6)])
-  lon <- as.numeric(unlist(lapply(strsplit(parts[1:2], "\\}"), "[", 1)))
-  lat <- as.numeric(unlist(lapply(strsplit(parts[3:4], ","), "[", 1)))
-  spex(raster::extent(lon, lat), crs = "+proj=longlat +datum=WGS84")
-}
+
 #' @export
 #' @name spex
 spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
@@ -75,6 +79,7 @@ spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
     out <- if (missing(x)) parse_leaf_extent() else parse_leaf_extent(x)
     return(out)
   }
+
   if (missing(crs)) crs <- NULL
    if (missing(x)) return(spex(raster::extent(graphics::par("usr")), crs = crs))
     if (byid) {
@@ -83,6 +88,15 @@ spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   } else {
     p <- as(extent(x), 'SpatialPolygons')
   }
+
+if (is.data.frame(x)) x<- as.matrix(x)
+if (is.list(x)) x <- do.call(cbind, x)
+if (is.numeric(x)) {
+  x <- as.matrix(x)
+  if (ncol(x) < 2) stop("matrix of 2 columns required")
+  if (ncol(x) > 2) warning("only 2 columns used from input")
+  return(spex(raster::extent(range(x[, 1L]), range(x[, 2L])), crs = crs))
+}
   if (missing(.id)) {
     .id <- sprintf("%s_extent", class(x)[1])
   }
@@ -94,6 +108,7 @@ spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
 #' @name spex
 spex.Extent <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   p <- as(extent(x), 'SpatialPolygons')
+  crs <- if (missing(crs) && raster::couldBeLonLat(x))  "+proj=longlat +datum=WGS84 +no_defs" else NULL
   raster::crs(p) <- crs
   spex(p, ...)
 }
