@@ -1,18 +1,39 @@
-language: R
-sudo: true
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-r:
-  - release
-  - devel
-  
+language: R
+warnings_are_errors: true
+sudo: true
 cache: packages
 
-dist: trusty
+addons:
+    apt:
+        packages:
+            - libproj-dev 
 
+matrix:
+    include:
+        - os: linux
+          r: release
+          dist: trusty # 14.04
+          env:
+           - BUILD_NAME=trusty_release
+           - DETAILS="old trusty"
+        - os: linux
+          r: release
+          dist: xenial # 16.04
+          env:
+           - BUILD_NAME=xenial_release
+           - DETAILS="release build"
+        - os: osx
+          r: release
+          env:
+           - BUILD_NAME=osx_release
+           - DETAILS="release build"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 
 after_success:
   - Rscript -e 'covr::codecov()'
-  
-before_install:
-  - sudo apt-get install --yes libproj-dev
-  - Rscript -e 'update.packages(ask = FALSE)'

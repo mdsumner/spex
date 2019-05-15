@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Whole grain buffers — buffer_extent • spex</title>
+<title>Latitude circle — latitudecircle • spex</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Whole grain buffers — buffer_extent" />
+<meta property="og:title" content="Latitude circle — latitudecircle" />
 
-<meta property="og:description" content="Ensure a raster extent aligns to a clean divisor." />
+<meta property="og:description" content="Create a circular polygon using a latitude value in a map projection. The
+longitude range can be modified from global to give a portion of a circle." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -97,53 +98,76 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Whole grain buffers</h1>
+    <h1>Latitude circle</h1>
     
-    <div class="hidden name"><code>buffer_extent.Rd</code></div>
+    <div class="hidden name"><code>latitudecircle.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Ensure a raster extent aligns to a clean divisor.</p>
+    <p>Create a circular polygon using a latitude value in a map projection. The
+longitude range can be modified from global to give a portion of a circle.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>buffer_extent</span>(<span class='no'>e1</span>, <span class='no'>e2</span>)</pre>
+    <pre class="usage"><span class='fu'>latitudecircle</span>(<span class='kw'>latitude</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84"</span>,
+  <span class='kw'>lonlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>180</span>, <span class='fl'>180</span>), <span class='kw'>nverts</span> <span class='kw'>=</span> <span class='fl'>1800</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>e1</th>
-      <td><p>input <code><a href='https://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></code></p></td>
+      <th>latitude</th>
+      <td><p>latitude value for the boundary, defaults to 0</p></td>
     </tr>
     <tr>
-      <th>e2</th>
-      <td><p>grain size</p></td>
+      <th>crs</th>
+      <td><p>map projection to use, defaults to southern Polar Stereographic true scale at -71S</p></td>
+    </tr>
+    <tr>
+      <th>lonlim</th>
+      <td><p>the range of longitude to use, defaults to entire globe</p></td>
+    </tr>
+    <tr>
+      <th>nverts</th>
+      <td><p>total number of vertices to use, see Details</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>SpatialPolygonsDataFrame</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is used to generate extents that have tidy boundaries,
-i.e. extents that align to a clean whole number like "10000".</p>
-<p>(We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.)</p>
+    <p>The argument <code>nverts</code> controls the total number of vertices of the circle
+within a linearly within the <code>lonlim</code> range of longitudes at <code>latitude</code></p>
+<p>This is for use on classic polar projections centred on the north or the
+south pole, particularly Polar Stereographic and Lambert Azimuthal Equal Area
+but will also work with some caveats on other families and situations. We
+have not explored this more general use. Feel free to contact the maintainer
+if you have interest in less typical usage or find problems.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='fu'>buffer_extent</span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='fl'>0.1</span>, <span class='fl'>2.2</span>, <span class='fl'>0</span>, <span class='fl'>3</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; class       : Extent 
-#&gt; xmin        : 0 
-#&gt; xmax        : 4 
-#&gt; ymin        : 0 
-#&gt; ymax        : 4 </div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>xpd</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='no'>lux</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>buffer_extent</span>(<span class='no'>lux</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/abline'>abline</a></span>(<span class='kw'>v</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5.7</span>, <span class='fl'>6.6</span>), <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>49.4</span>, <span class='fl'>50.2</span>))</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/title'>title</a></span>(<span class='st'>"boundaries on clean alignment to 0.1"</span>)</div><div class='img'><img src='buffer_extent-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='no'>p</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>latitudecircle</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, -<span class='fl'>65</span>, <span class='kw'>by</span> <span class='kw'>=</span> -<span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ignoring multiple latitude values, using first</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
+#&gt; features    : 1 
+#&gt; extent      : -12367392, 12367392, -12367396, 12367377  (xmin, xmax, ymin, ymax)
+#&gt; coord. ref. : +proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84 
+#&gt; variables   : 1
+#&gt; names       : latitude 
+#&gt; value       :        0 </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>raster</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>ice</span>)</div><div class='input'><span class='no'>circ</span> <span class='kw'>&lt;-</span> <span class='fu'>latitudecircle</span>(-<span class='fl'>71</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/projection'>projection</a></span>(<span class='no'>ice</span>))
+<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>circ</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='latitudecircle-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Whole grain buffers — buffer_extent • spex</title>
+<title>Latitude mask for polar raster — latmask • spex</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="Whole grain buffers — buffer_extent" />
+<meta property="og:title" content="Latitude mask for polar raster — latmask" />
 
-<meta property="og:description" content="Ensure a raster extent aligns to a clean divisor." />
+<meta property="og:description" content="Mask out values based on latitude for a raster. This works by finding all cells at
+latitudes less than latitude and setting them to missing. If southern = FALSE
+the inequality is reversed, and all cells at latitudes greater than latitude are
+masked out." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -97,54 +100,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Whole grain buffers</h1>
+    <h1>Latitude mask for polar raster</h1>
     
-    <div class="hidden name"><code>buffer_extent.Rd</code></div>
+    <div class="hidden name"><code>latmask.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Ensure a raster extent aligns to a clean divisor.</p>
+    <p>Mask out values based on latitude for a raster. This works by finding all cells at
+latitudes less than <code>latitude</code> and setting them to missing. If <code>southern = FALSE</code>
+the inequality is reversed, and all cells at latitudes greater than <code>latitude</code> are
+masked out.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>buffer_extent</span>(<span class='no'>e1</span>, <span class='no'>e2</span>)</pre>
+    <pre class="usage"><span class='fu'>latmask</span>(<span class='no'>x</span>, <span class='kw'>latitude</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>southern</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>e1</th>
-      <td><p>input <code><a href='https://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></code></p></td>
+      <th>x</th>
+      <td><p>a raster layer</p></td>
     </tr>
     <tr>
-      <th>e2</th>
-      <td><p>grain size</p></td>
+      <th>latitude</th>
+      <td><p>maximum latitude  (effectively a minimum latitude if <code>southern = FALSe</code>)</p></td>
+    </tr>
+    <tr>
+      <th>southern</th>
+      <td><p>flag for whether south-polar context is used, default is <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>trim</th>
+      <td><p>if <code>TRUE</code> runs <code><a href='https://www.rdocumentation.org/packages/raster/topics/trim'>raster::trim</a></code> on the result, to remove <code>NA</code> margin</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>ignored currently</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>RasterLayer</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is used to generate extents that have tidy boundaries,
-i.e. extents that align to a clean whole number like "10000".</p>
-<p>(We can't use the S4 group generic because raster has set that specifically for use with '+' and '-'.)</p>
+    <p>The <code>trim</code> option allows for the result to be reduced to the common bounding box
+within which any row or column has a non-missing value.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://www.rdocumentation.org/packages/raster/topics/trim'>raster::trim</a>, <a href='latitudecircle.html'>latitudecircle</a></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='fu'>buffer_extent</span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='fl'>0.1</span>, <span class='fl'>2.2</span>, <span class='fl'>0</span>, <span class='fl'>3</span>), <span class='fl'>2</span>)</div><div class='output co'>#&gt; class       : Extent 
-#&gt; xmin        : 0 
-#&gt; xmax        : 4 
-#&gt; ymin        : 0 
-#&gt; ymax        : 4 </div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>xpd</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>lux</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='no'>lux</span>), <span class='kw'>lty</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>buffer_extent</span>(<span class='no'>lux</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/abline'>abline</a></span>(<span class='kw'>v</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5.7</span>, <span class='fl'>6.6</span>), <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>49.4</span>, <span class='fl'>50.2</span>))</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/title'>title</a></span>(<span class='st'>"boundaries on clean alignment to 0.1"</span>)</div><div class='img'><img src='buffer_extent-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='no'>p</span>)</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>raster</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>latmask</span>(<span class='no'>ice</span>, -<span class='fl'>60</span>))</div><div class='img'><img src='latmask-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>latmask</span>(<span class='no'>ice</span>, -<span class='fl'>60</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='img'><img src='latmask-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>ice</span>[!<span class='no'>ice</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>ice</span>)</div><div class='img'><img src='latmask-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'>latmask</span>(<span class='no'>ice</span>, -<span class='fl'>55</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='img'><img src='latmask-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

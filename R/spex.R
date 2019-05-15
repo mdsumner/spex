@@ -28,10 +28,10 @@ parse_leaf_extent <- function(x) {
 #' work on RStudio Server, so we allow the text value to be passed in. 
 #' I.e. `spex(clipboard = TRUE)` will
 #' read from the clipboard, `spex(tx, clipboard = TRUE)` will read from tx with value like 
-#' `'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...'`. 
+#' \code{'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...}"'}. 
 #' 
 #' 
-#' This function is to replace a common pattern in the 'sp'-'raster' family which is
+#' This function is to replace a common pattern in spatial packages which is
 #' \itemize{
 #' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
 #' \item coerce the Extent to \code{\link[sp]{SpatialPolygons}}

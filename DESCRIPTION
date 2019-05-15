@@ -17,9 +17,9 @@ Imports:
     methods,
     quadmesh,
     raster,
+    reproj,
     sp,
-    stats,
-    proj4
+    stats
 RoxygenNote: 6.1.1
 URL: https://mdsumner.github.io/spex/
 BugReports: https://github.com/mdsumner/spex/issues

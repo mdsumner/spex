@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • spex</title>
+<title>spex — spex-package • spex</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,12 +25,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="spex — spex-package" />
+
+<meta property="og:description" content="Tools for spatial extents that are agnostic regarding format (i.e. sp,
+sf, or raster). These functions fill some of the gaps within and between
+these packages for dealing with object extents in flexible ways. Generally,
+spex considers extents of raster cells, and extents of objects as first-class
+objects (with projection metadata). and provides helpers for  latitudinal
+boundaries within projected data." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +55,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,7 +67,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">spex</a>
+        <a class="navbar-link" href="../index.html">spex</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9002</span>
       </span>
     </div>
@@ -67,16 +75,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -92,22 +100,63 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Authors</h1>
+    <h1>spex</h1>
+    
+    <div class="hidden name"><code>spex-package.Rd</code></div>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Michael D. Sumner</strong>. Author, maintainer. 
-        </p>
-      </li>
-    </ul>
+    <div class="ref-description">
+    
+    <p>Tools for spatial extents that are agnostic regarding format (i.e. <code>sp</code>,
+<code>sf</code>, or <code>raster</code>). These functions fill some of the gaps within and between
+these packages for dealing with object extents in flexible ways. Generally,
+spex considers extents of raster cells, and extents of objects as first-class
+objects (with projection metadata). and provides helpers for  latitudinal
+boundaries within projected data.</p>
+    
+    </div>
+
+        
+    <h2 class="hasAnchor" id="spatial-extent"><a class="anchor" href="#spatial-extent"></a>Spatial Extent</h2>
+
+    
+    <table class='table'>
+<tr><td></td><td><code><a href='buffer_extent.html'>buffer_extent</a></code></td></tr>
+<tr><td></td><td>Buffer an extent to a given whole number.</td></tr>
+<tr><td></td><td><code><a href='latitudecircle.html'>latitudecircle</a></code></td></tr>
+<tr><td></td><td>Create a latitude circle in a chosen projection.</td></tr>
+<tr><td></td><td><code><a href='latmask.html'>latmask</a></code></td></tr>
+<tr><td></td><td>Mask a raster based on a minimum (or maximum) latitude.</td></tr>
+<tr><td></td><td><code><a href='polygonize.html'>polygonize</a></code></td></tr>
+<tr><td></td><td>Convert raster cells to polygons.</td></tr>
+<tr><td></td><td><code><a href='polygonize.html'>qm_rasterToPolygons</a></code></td></tr>
+<tr><td></td><td>The</td></tr>
+<tr><td><code>sf</code></td><td>version of</td></tr>
+<tr><td><code>polygonize</code></td><td>.</td></tr>
+<tr><td></td><td><code><a href='polygonize.html'>qm_rasterToPolygons_sp</a></code></td></tr>
+<tr><td></td><td>The</td></tr>
+<tr><td><code>sp</code></td><td>version of</td></tr>
+<tr><td><code>polygonize</code></td><td>.</td></tr>
+<tr><td></td><td><code><a href='spex.html'>spex</a></code></td></tr>
+<tr><td></td><td>A function to produce a fully fledged Spatial object extent.</td></tr>
+<tr><td></td><td><code><a href='xlim.html'>xlim</a>, <a href='xlim.html'>ylim</a></code></td></tr>
+<tr><td></td><td>Helper functions for extents.</td></tr>
+<tr><td></td><td></td></tr>
+</table>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#spatial-extent">Spatial Extent</a></li>
+          </ul>
 
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

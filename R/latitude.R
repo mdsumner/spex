@@ -18,7 +18,7 @@
 #' @param nverts total number of vertices to use, see Details 
 #' @return SpatialPolygonsDataFrame
 #' @export
-#'
+#' @importFrom reproj reproj
 #' @examples
 #' latitudecircle(seq(0, -65, by = -5))
 #' library(raster)
@@ -32,7 +32,10 @@ latitudecircle <- function(latitude = 0, crs = "+proj=stere +lon_0=0 +lat_0=-90 
   if (length(latitude) > 1) warning("ignoring multiple latitude values, using first")
   latitude <- latitude[1L]
 
-  raster::spPolygons(proj4::project(cbind(seq(lonlim[1], lonlim[2], length = nverts), latitude), crs), crs = crs, attr  = data.frame(latitude = latitude))
+  raster::spPolygons(
+    reproj::reproj(cbind(seq(lonlim[1], lonlim[2], length = nverts), latitude), crs, 
+                                    source = "+proj=longlat +datum=WGS84 +no_defs")[,1:2], 
+    crs = crs, attr  = data.frame(latitude = latitude))
 }
 
 #' Latitude mask for polar raster

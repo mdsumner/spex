@@ -36,6 +36,29 @@ spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 \description{
 Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
 }
+\details{
+Called with no arguments will return the extent of the current 'par("usr")' setting.
+
+Called with a matrix, list, or data frame it will create an extent from a two columned thing.
+
+Called with \code{clipboard = TRUE} and \code{x} will be treated as the JSON-ic output of the clipboard copy from
+leafem (WIP). If x is missing, it will be attempted to be read from the clipboard. Clipboard read cannot
+work on RStudio Server, so we allow the text value to be passed in.
+I.e. \code{spex(clipboard = TRUE)} will
+read from the clipboard, \code{spex(tx, clipboard = TRUE)} will read from tx with value like
+\code{'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...}"'}.
+
+This function is to replace a common pattern in spatial packages which is
+\itemize{
+\item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
+\item coerce the Extent to \code{\link[sp]{SpatialPolygons}}
+\item restore the 'CRS', the "coordinate reference system", i.e. projection metadata
+\item elevate the object to be a \code{\link[sp]{SpatialPolygonsDataFrame}}.
+}
+
+In short, this pattern exists because there is no projection metadata stored
+with either sp's \code{\link[sp]{bbox}} or raster's \code{\link[raster]{Extent}}.
+}
 \section{Warning}{
  Please note that an extent converted to polygons consists
 of only four unique coordinates, and so this is not necessarily suited for

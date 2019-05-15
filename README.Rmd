@@ -1,14 +1,10 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-[![Travis-CI Build Status](https://travis-ci.org/mdsumner/spex.svg?branch=master)](https://travis-ci.org/mdsumner/spex)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/spex)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/spex/master.svg)](https://codecov.io/github/mdsumner/spex?branch=master)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/spex)]( https://CRAN.R-project.org/package=spex)
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -18,10 +14,19 @@ knitr::opts_chunk$set(
 )
 ```
 
+<!-- badges: start -->
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/spex.svg?branch=master&env=BUILD_NAME=xenial_release&label=linux)](https://travis-ci.org/mdsumner/spex)
+[![Build Status](https://travis-ci.org/mdsumner/spex.svg?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/mdsumner/spex)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/mdsumner/spex?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/spex)
+[![Coverage status](https://codecov.io/gh/mdsumner/spex/branch/master/graph/badge.svg)](https://codecov.io/github/mdsumner/spex?branch=master)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable) 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/spex)](https://cran.r-project.org/package=spex)
+<!-- badges: end -->
+  
 ## spex
 
 Spex provides a small set of functions for working with spatial data. These are
-
 
 * `spex()` - a spatial extent with projection metadata
 * `polygonize()` - a fast quadmesh-based pixel-to-polygon translation 
@@ -105,6 +110,7 @@ spex(psf)
 spex(sf::st_set_crs(psf, 3031))
 ```
 
-Should we alias `spex` with `sfex` for the obvious corollary?
+
+---
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
