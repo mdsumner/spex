@@ -71,9 +71,9 @@ latmask <- function(x, latitude = 0, southern = TRUE, trim = FALSE, ...) {
   if (raster::isLonLat(x))  {
     xy <- sp::coordinates(x)
     } else   {
-      xy <- proj4::ptransform(sp::coordinates(x), raster::projection(x), "+proj=longlat +datum=WGS84")
+      xy <- reproj::reproj(sp::coordinates(x), "+proj=longlat +datum=WGS84", source = raster::projection(x))
     }
-  if (southern) x[xy[,2] > (latitude * pi/180)] <- NA else x[xy[,2] < (latitude * pi/180)] <- NA
+  if (southern) x[xy[,2] > (latitude )] <- NA else x[xy[,2] < (latitude)] <- NA
   if (trim) x <- raster::trim(x)
   x
 }

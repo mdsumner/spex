@@ -25,7 +25,9 @@ These are
   - `polygonize()` - a fast quadmesh-based pixel-to-polygon translation
   - `buffer_extent` - a convenience function for tidy extents
   - `xlim`, `ylim` - convenience functions for the axes of an extent
-  - `extent` - convenience functions for sf objects
+  - `extent()` - convenience functions for sf objects
+  - `latmask()` - mask a raster based on a latitude
+  - `latitudecircle()` - create a spatial region based on a latitude
 
 Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object
 understood by the ‘raster’ package function ‘extent()’. If the input has
@@ -110,7 +112,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.256   0.000   0.256
+#>   0.241   0.012   0.253
 ```
 
 Create a buffered extent with whole-number aligned edges.

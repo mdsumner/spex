@@ -117,7 +117,11 @@
 <li>
 <code>xlim</code>, <code>ylim</code> - convenience functions for the axes of an extent</li>
 <li>
-<code>extent</code> - convenience functions for sf objects</li>
+<code><a href="reference/extent.html">extent()</a></code> - convenience functions for sf objects</li>
+<li>
+<code><a href="reference/latmask.html">latmask()</a></code> - mask a raster based on a latitude</li>
+<li>
+<code><a href="reference/latitudecircle.html">latitudecircle()</a></code> - create a spatial region based on a latitude</li>
 </ul>
 <p>Create a fully-fledged SpatialPolygonsDataFrame <em>extent</em> from any object understood by the ‘raster’ package function ‘extent()’. If the input has projection metadata it will be carried through to the output. The intention is to support any object from packages <code>sp</code>, <code>raster</code> and <code>sf</code>. If you want this to work on other types, <a href="https://github.com/mdsumner/spex/issues">create an issue and get in touch to discuss!</a>.</p>
 <p>The polygonization approach is faster than <code>rasterToPolygons</code>, and multi-layer rasters are converted to multi-column spatial data frames. This only does the pixel-to-polygon case. It provides an <code>sf</code> POLYGON data frame, but there is a version <code>qm_rasterToPolygons_sp</code> that returns a Spatial version.</p>
@@ -183,7 +187,7 @@
 <a class="sourceLine" id="cb3-25" data-line-number="25"></a>
 <a class="sourceLine" id="cb3-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(tm)</a>
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   0.256   0.000   0.256</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   0.241   0.012   0.253</span></a></code></pre></div>
 <p>Create a buffered extent with whole-number aligned edges.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(spex)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>

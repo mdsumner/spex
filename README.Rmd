@@ -32,7 +32,9 @@ Spex provides a small set of functions for working with spatial data. These are
 * `polygonize()` - a fast quadmesh-based pixel-to-polygon translation 
 * `buffer_extent` - a convenience function for tidy extents
 * `xlim`, `ylim` - convenience functions for the axes of an extent
-* `extent` - convenience functions for sf objects
+* `extent()` - convenience functions for sf objects
+* `latmask()` - mask a raster based on a latitude
+* `latitudecircle()` - create a spatial region based on a latitude
 
 Create a fully-fledged SpatialPolygonsDataFrame *extent* from any object understood
 by the 'raster' package function 'extent()'. If the input has projection metadata it
