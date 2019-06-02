@@ -49,7 +49,7 @@ parse_leaf_extent <- function(x) {
 #' @param crs a projection string
 #' @param clipboard WIP this special-case allows x to be the result of the leafem clipboard copy process
 #' @importFrom methods as
-#' @importFrom raster crs<- crs extent
+#' @importFrom raster projection<- projection extent
 #' @importFrom sp SpatialPolygonsDataFrame
 #' @importFrom stats setNames
 #' @return 'SpatialPolygonsDataFrame'
@@ -74,20 +74,18 @@ spex <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
 
 #' @export
 #' @name spex
-spex.default <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
+spex.default <- function(x, crs = NULL, byid = FALSE, .id, ..., clipboard = FALSE) {
   if (clipboard) {
     out <- if (missing(x)) parse_leaf_extent() else parse_leaf_extent(x)
     return(out)
   }
-
-  if (missing(crs)) crs <- NULL
-   if (missing(x)) return(spex(raster::extent(graphics::par("usr")), crs = crs))
-    if (byid) {
-    stop("byid option not yet implemented")
-    #lapply(split(x, seq(nrow(x))), raster::extent)
-  } else {
-    p <- as(extent(x), 'SpatialPolygons')
+  if (missing(x)) x <- raster::extent(graphics::par("usr"))
+  cls <- class(x)[1L]
+  if (is.null(crs)) {
+    crs <- raster::projection(x)
   }
+  #if (missing(crs) && raster::couldBeLonLat(x)) crs <-  "+proj=longlat +datum=WGS84 +no_defs" 
+  
 
 if (is.data.frame(x)) x<- as.matrix(x)
 if (is.list(x)) x <- do.call(cbind, x)
@@ -95,22 +93,20 @@ if (is.numeric(x)) {
   x <- as.matrix(x)
   if (ncol(x) < 2) stop("matrix of 2 columns required")
   if (ncol(x) > 2) warning("only 2 columns used from input")
-  return(spex(raster::extent(range(x[, 1L]), range(x[, 2L])), crs = crs))
-}
-  if (missing(.id)) {
-    .id <- sprintf("%s_extent", class(x)[1])
-  }
-  crs(p) <- crs(x)
-  SpatialPolygonsDataFrame(p, setNames(data.frame(1L), .id))
 }
 
-#' @export
-#' @name spex
-spex.Extent <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
+if (byid) {
+  stop("byid option not yet implemented")
+  #lapply(split(x, seq(nrow(x))), raster::extent)
+} else {
   p <- as(extent(x), 'SpatialPolygons')
-  crs <- if (missing(crs) && raster::couldBeLonLat(x))  "+proj=longlat +datum=WGS84 +no_defs" else NULL
-  raster::crs(p) <- crs
-  spex(p, ...)
+}
+  if (missing(.id)) {
+    .id <- sprintf("%s_extent", cls)
+  }
+
+  raster::projection(p) <- crs
+  SpatialPolygonsDataFrame(p, setNames(data.frame(1L), .id))
 }
 
 #' Extent of simple features

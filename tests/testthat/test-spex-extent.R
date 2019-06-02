@@ -1,7 +1,8 @@
 context("spex-extent")
 
 test_that("extent and crs works", {
-  expect_that(spex(raster::extent(lux), raster::crs(lux)), is_a("SpatialPolygonsDataFrame"))
+  expect_that(spex(raster::extent(lux), raster::projection(lux)), is_a("SpatialPolygonsDataFrame"))
+  expect_true(raster::projection(spex(raster::extent(lux), raster::projection(lux))) == raster::projection(lux))
 })
 
 

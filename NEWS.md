@@ -1,4 +1,4 @@
-# spex 0.5.0.9001
+# spex 0.6.0
 
 * Wrap previous proj4 code with reproj, proj4 is no longer imported by spex. 
 

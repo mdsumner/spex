@@ -3,16 +3,12 @@
 \name{spex}
 \alias{spex}
 \alias{spex.default}
-\alias{spex.Extent}
 \alias{spex.sf}
 \title{Polygon extent}
 \usage{
 spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 
-\method{spex}{default}(x, crs, byid = FALSE, .id, ...,
-  clipboard = FALSE)
-
-\method{spex}{Extent}(x, crs, byid = FALSE, .id, ...,
+\method{spex}{default}(x, crs = NULL, byid = FALSE, .id, ...,
   clipboard = FALSE)
 
 \method{spex}{sf}(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)

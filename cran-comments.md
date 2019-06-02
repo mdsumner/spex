@@ -1,7 +1,8 @@
 ## Test environments
 
 * Travis ubuntu 14.04 (release)
-* local debian (release)
+* local ubuntu (release)
+* winbuilder (devel)
 
 ## R CMD check results
 
