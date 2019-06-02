@@ -112,7 +112,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.298   0.020   0.318
+#>   0.291   0.016   0.308
 ```
 
 Create a buffered extent with whole-number aligned edges.

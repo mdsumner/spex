@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">spex</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; features    : 1 </span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; crs         : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; variables   : 1</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; names       : SpatialPolygonsDataFrame_extent </span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; value       :                               1</span></a>
@@ -123,10 +123,10 @@
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; features    : 1 </span></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; coord. ref. : +proj=laea +ellps=WGS84 </span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; crs         : +proj=laea +ellps=WGS84 </span></a>
 <a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; variables   : 1</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; names       : SpatialPolygons_extent </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; value       :                      1</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; names       : Extent_extent </span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; value       :             1</span></a></code></pre></div>
 <p>Create a simple features POLYGON data frame from a raster.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(spex)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raster)</a>
@@ -155,57 +155,57 @@
 <a class="sourceLine" id="cb3-25" data-line-number="25"></a>
 <a class="sourceLine" id="cb3-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(tm)</a>
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   0.240   0.012   0.252</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;   0.289   0.008   0.297</span></a></code></pre></div>
 <p>Create a buffered extent with whole-number aligned edges.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(spex)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">(ex &lt;-<span class="st"> </span><span class="kw"><a href="reference/extent.html">extent</a></span>(lux))</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; class       : Extent </span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; xmin        : 5.74414 </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; xmax        : 6.528252 </span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; ymin        : 49.44781 </span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; ymax        : 50.18162</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; class      : Extent </span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; xmin       : 5.74414 </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; xmax       : 6.528252 </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; ymin       : 49.44781 </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; ymax       : 50.18162</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw"><a href="reference/buffer_extent.html">buffer_extent</a></span>(ex, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; class       : Extent </span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; xmin        : 0 </span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; xmax        : 10 </span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; ymin        : 40 </span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; ymax        : 60</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; class      : Extent </span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; xmin       : 0 </span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; xmax       : 10 </span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; ymin       : 40 </span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; ymax       : 60</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17"><span class="kw"><a href="reference/buffer_extent.html">buffer_extent</a></span>(ex, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; class       : Extent </span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; xmin        : 4 </span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; xmax        : 8 </span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; ymin        : 48 </span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; ymax        : 52</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; class      : Extent </span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; xmin       : 4 </span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; xmax       : 8 </span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; ymin       : 48 </span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; ymax       : 52</span></a></code></pre></div>
 <p>There are convenience functions for sf objects.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">class</a></span>(psf)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] "sf"         "data.frame"</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="reference/extent.html">extent</a></span>(psf)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; class       : Extent </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; xmin        : 0 </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; xmax        : 1.23 </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; ymin        : 0 </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; ymax        : 1</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; class      : Extent </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; xmin       : 0 </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; xmax       : 1.23 </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; ymin       : 0 </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; ymax       : 1</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="kw"><a href="reference/spex.html">spex</a></span>(psf)</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; features    : 1 </span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; coord. ref. : NA </span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; crs         : NA </span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; variables   : 1</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; names       : SpatialPolygons_extent </span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; value       :                      1</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; names       : Extent_extent </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; value       :             1</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="kw"><a href="reference/spex.html">spex</a></span>(sf<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_crs">st_set_crs</a></span>(psf, <span class="dv">3031</span>))</a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; features    : 1 </span></a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; coord. ref. : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; crs         : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
 <a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; variables   : 1</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; names       : SpatialPolygons_extent </span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; value       :                      1</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; names       : Extent_extent </span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; value       :             1</span></a></code></pre></div>
 <hr>
-<p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="https://hypertidy.github.io/reproj/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
   </div>
 

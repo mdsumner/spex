@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">spex</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -111,11 +111,7 @@
     <pre class="usage"><span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>, <span class='kw'>clipboard</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>,
-  <span class='kw'>clipboard</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='co'># S3 method for Extent</span>
-<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='no'>crs</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>,
+<span class='fu'>spex</span>(<span class='no'>x</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>byid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>.id</span>, <span class='no'>...</span>,
   <span class='kw'>clipboard</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for sf</span>
@@ -194,10 +190,10 @@ projection transformations.</p>
 <span class='fu'>spex</span>(<span class='fu'><a href='extent.html'>extent</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>), <span class='kw'>crs</span> <span class='kw'>=</span> <span class='st'>"+proj=laea +ellps=WGS84"</span>)</div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
 #&gt; features    : 1 
 #&gt; extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : NA 
+#&gt; crs         : +proj=laea +ellps=WGS84 
 #&gt; variables   : 1
-#&gt; names       : SpatialPolygons_extent 
-#&gt; value       :                      1 </div></pre>
+#&gt; names       : Extent_extent 
+#&gt; value       :             1 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
