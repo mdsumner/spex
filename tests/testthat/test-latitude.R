@@ -1,7 +1,7 @@
 context("test-latitude.R")
 library(raster)  ## values()
 lat1 <- latitudecircle(-70)
-lat2 <- latitudecircle(70, crs = "+proj=stere +lat_0=90")
+lat2 <- latitudecircle(70, crs = "+proj=stere +lat_0=90 +datum=WGS84")
 #dput(extent(lat2))
 
 ## these are the difference between proj4::project and reproj::reproj (ptransform)

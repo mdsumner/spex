@@ -66,7 +66,7 @@ data(lux)
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)
-#> coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+#> crs         : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
 #> variables   : 1
 #> names       : SpatialPolygonsDataFrame_extent 
 #> value       :                               1
@@ -76,10 +76,10 @@ spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : +proj=laea +ellps=WGS84 
+#> crs         : +proj=laea +ellps=WGS84 
 #> variables   : 1
-#> names       : SpatialPolygons_extent 
-#> value       :                      1
+#> names       : Extent_extent 
+#> value       :             1
 ```
 
 Create a simple features POLYGON data frame from a raster.
@@ -112,7 +112,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.241   0.012   0.253
+#>   0.298   0.020   0.318
 ```
 
 Create a buffered extent with whole-number aligned edges.
@@ -121,25 +121,25 @@ Create a buffered extent with whole-number aligned edges.
 library(spex)
 
 (ex <- extent(lux))
-#> class       : Extent 
-#> xmin        : 5.74414 
-#> xmax        : 6.528252 
-#> ymin        : 49.44781 
-#> ymax        : 50.18162
+#> class      : Extent 
+#> xmin       : 5.74414 
+#> xmax       : 6.528252 
+#> ymin       : 49.44781 
+#> ymax       : 50.18162
 
 buffer_extent(ex, 10)
-#> class       : Extent 
-#> xmin        : 0 
-#> xmax        : 10 
-#> ymin        : 40 
-#> ymax        : 60
+#> class      : Extent 
+#> xmin       : 0 
+#> xmax       : 10 
+#> ymin       : 40 
+#> ymax       : 60
 
 buffer_extent(ex, 2)
-#> class       : Extent 
-#> xmin        : 4 
-#> xmax        : 8 
-#> ymin        : 48 
-#> ymax        : 52
+#> class      : Extent 
+#> xmin       : 4 
+#> xmax       : 8 
+#> ymin       : 48 
+#> ymax       : 52
 ```
 
 There are convenience functions for sf objects.
@@ -148,31 +148,31 @@ There are convenience functions for sf objects.
 class(psf)
 #> [1] "sf"         "data.frame"
 extent(psf)
-#> class       : Extent 
-#> xmin        : 0 
-#> xmax        : 1.23 
-#> ymin        : 0 
-#> ymax        : 1
+#> class      : Extent 
+#> xmin       : 0 
+#> xmax       : 1.23 
+#> ymin       : 0 
+#> ymax       : 1
 spex(psf)
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : NA 
+#> crs         : NA 
 #> variables   : 1
-#> names       : SpatialPolygons_extent 
-#> value       :                      1
+#> names       : Extent_extent 
+#> value       :             1
 spex(sf::st_set_crs(psf, 3031))
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)
-#> coord. ref. : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+#> crs         : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 #> variables   : 1
-#> names       : SpatialPolygons_extent 
-#> value       :                      1
+#> names       : Extent_extent 
+#> value       :             1
 ```
 
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+Conduct](https://hypertidy.github.io/reproj/CODE_OF_CONDUCT.html). By
+participating in this project you agree to abide by its terms.

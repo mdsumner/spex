@@ -115,4 +115,4 @@ spex(sf::st_set_crs(psf, 3031))
 
 ---
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://hypertidy.github.io/reproj/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.
