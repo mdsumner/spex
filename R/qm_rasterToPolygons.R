@@ -43,7 +43,7 @@
 #' @export
 polygonize.RasterLayer <- function(x, na.rm = TRUE, ...) {
   ## get all the layers off the raster
-  sf1 <- stats::setNames(as.data.frame(raster::values(x)), names(x))
+  sf1 <- stats::setNames(tibble::as_tibble(raster::values(x)), names(x))
   if (!raster::hasValues(x) & na.rm) {
     warning("raster has no values, ignoring 'na.rm = TRUE'")
     na.rm <- FALSE
