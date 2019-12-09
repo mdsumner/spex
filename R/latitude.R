@@ -35,7 +35,7 @@ latitudecircle <- function(latitude = 0, crs = "+proj=stere +lon_0=0 +lat_0=-90 
   raster::spPolygons(
     reproj::reproj(cbind(seq(lonlim[1], lonlim[2], length = nverts), latitude), crs, 
                                     source = "+proj=longlat +datum=WGS84 +no_defs")[,1:2], 
-    crs = crs, attr  = data.frame(latitude = latitude))
+    crs = sp::CRS(crs, doCheckCRSArgs = FALSE), attr  = data.frame(latitude = latitude))
 }
 
 #' Latitude mask for polar raster
