@@ -20,7 +20,7 @@ Imports:
     reproj (>= 0.4.0),
     sp,
     stats
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 URL: https://mdsumner.github.io/spex/
 BugReports: https://github.com/mdsumner/spex/issues
 Suggests: 
