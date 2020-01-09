@@ -8,7 +8,8 @@
 \usage{
 spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 
-\method{spex}{default}(x, crs = NULL, byid = FALSE, .id, ..., clipboard = FALSE)
+\method{spex}{default}(x, crs = NULL, byid = FALSE, .id, ...,
+  clipboard = FALSE)
 
 \method{spex}{sf}(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 }

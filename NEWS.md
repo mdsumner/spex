@@ -1,3 +1,7 @@
+# spex dev
+
+* Ensure projargs is character, not logical. 
+
 # spex 0.6.0
 
 * Wrap previous proj4 code with reproj, proj4 is no longer imported by spex. 

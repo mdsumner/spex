@@ -4,8 +4,8 @@ parse_leaf_extent <- function(x) {
     if (inherits(x, "try-error")) {
       stop("cannot read from clipboard")
     }
-    
-    
+
+
     if (!grepl("^'\\{\"\\_southWest", x)) stop("clipboard contents does not look like leafem copy output")
   }
   #{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_northEast":{"lat":6.937332868878443,"lng":31.904296875000004}}'
@@ -19,18 +19,18 @@ parse_leaf_extent <- function(x) {
 #'
 #' Create Spatial Polygons with projection metadata from a 'Spatial Extent'.
 #'
-#' Called with no arguments will return the extent of the current 'par("usr")' setting. 
-#' 
-#' Called with a matrix, list, or data frame it will create an extent from a two columned thing. 
-#' 
-#' Called with `clipboard = TRUE` and `x` will be treated as the JSON-ic output of the clipboard copy from 
+#' Called with no arguments will return the extent of the current 'par("usr")' setting.
+#'
+#' Called with a matrix, list, or data frame it will create an extent from a two columned thing.
+#'
+#' Called with `clipboard = TRUE` and `x` will be treated as the JSON-ic output of the clipboard copy from
 #' leafem (WIP). If x is missing, it will be attempted to be read from the clipboard. Clipboard read cannot
-#' work on RStudio Server, so we allow the text value to be passed in. 
+#' work on RStudio Server, so we allow the text value to be passed in.
 #' I.e. `spex(clipboard = TRUE)` will
-#' read from the clipboard, `spex(tx, clipboard = TRUE)` will read from tx with value like 
-#' \code{'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...}"'}. 
-#' 
-#' 
+#' read from the clipboard, `spex(tx, clipboard = TRUE)` will read from tx with value like
+#' \code{'{"_southWest":{"lat":-1.307259612275665,"lng":23.411865234375},"_north...}"'}.
+#'
+#'
 #' This function is to replace a common pattern in spatial packages which is
 #' \itemize{
 #' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
@@ -84,8 +84,9 @@ spex.default <- function(x, crs = NULL, byid = FALSE, .id, ..., clipboard = FALS
   if (is.null(crs)) {
     crs <- raster::projection(x)
   }
-  #if (missing(crs) && raster::couldBeLonLat(x)) crs <-  "+proj=longlat +datum=WGS84 +no_defs" 
-  
+  if (is.na(crs)) crs <- NA_character_
+  #if (missing(crs) && raster::couldBeLonLat(x)) crs <-  "+proj=longlat +datum=WGS84 +no_defs"
+
 
 if (is.data.frame(x)) x<- as.matrix(x)
 if (is.list(x)) x <- do.call(cbind, x)
@@ -109,12 +110,12 @@ if (byid) {
 }
 
 #' Extent of simple features
-#' 
-#' This is the simplest of the missing "raster support" for the sf package, 
-#' here using the xmin, xmax, ymin, ymax convention used by raster rather than 
-#' the transpose version favoured in sp and sf. 
+#'
+#' This is the simplest of the missing "raster support" for the sf package,
+#' here using the xmin, xmax, ymin, ymax convention used by raster rather than
+#' the transpose version favoured in sp and sf.
 #' @param x object with an extent
-#' @param ... unused 
+#' @param ... unused
 #' @name extent
 #' @aliases Extent
 #' @importFrom raster extent
@@ -131,10 +132,10 @@ spex.sf <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
 }
 
 #' Axis ranges from extent
-#' 
-#' Functions `xlim` and `ylim` return the two-value counterparts of an extent. 
-#' 
-#' Any projection metadata is dropped since this is a one-dimensional entity. 
+#'
+#' Functions `xlim` and `ylim` return the two-value counterparts of an extent.
+#'
+#' Any projection metadata is dropped since this is a one-dimensional entity.
 #' @param x any object with an extent understood by `spex`
 #' @param ... reserved for future methods
 #' @export

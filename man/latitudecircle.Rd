@@ -4,12 +4,9 @@
 \alias{latitudecircle}
 \title{Latitude circle}
 \usage{
-latitudecircle(
-  latitude = 0,
+latitudecircle(latitude = 0,
   crs = "+proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-71 +ellps=WGS84",
-  lonlim = c(-180, 180),
-  nverts = 1800
-)
+  lonlim = c(-180, 180), nverts = 1800)
 }
 \arguments{
 \item{latitude}{latitude value for the boundary, defaults to 0}
