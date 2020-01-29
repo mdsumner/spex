@@ -105,7 +105,11 @@ if (byid) {
   if (missing(.id)) {
     .id <- sprintf("%s_extent", cls)
   }
-  raster::crs(p) <- sp::CRS(crs, doCheckCRSArgs = FALSE)
+  if (is.character(crs)) {
+    raster::crs(p) <- sp::CRS(crs, doCheckCRSArgs = FALSE)
+  } else {
+    raster::crs(p) <- crs
+  }
   SpatialPolygonsDataFrame(p, setNames(data.frame(1L), .id))
 }
 
