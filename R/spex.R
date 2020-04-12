@@ -82,7 +82,11 @@ spex.default <- function(x, crs = NULL, byid = FALSE, .id, ..., clipboard = FALS
   if (missing(x)) x <- raster::extent(graphics::par("usr"))
   cls <- class(x)[1L]
   if (is.null(crs)) {
-    crs <- raster::projection(x)
+    #crs <- raster::projection(x)
+    crs <- crsmeta::crs_proj(x)
+    if (is.na(crs)) {
+      crs <- crsmeta::crs_input(x)
+    }
   }
   if (is.na(crs)) crs <- NA_character_
   #if (missing(crs) && raster::couldBeLonLat(x)) crs <-  "+proj=longlat +datum=WGS84 +no_defs"
@@ -132,8 +136,25 @@ setMethod(f = "extent", signature = "sf", definition = extent_sf)
 #' @export
 #' @name spex
 spex.sf <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
-  spex(extent(x), attr(x[[attr(x, "sf_column")]], "crs")$proj4string)
+  if (missing(crs)) {
+    crs <- crsmeta::crs_proj(x)
+    if (is.na(crs)) {
+      crs <- crsmeta::crs_input(x)
+    }
+  }
+  spex(extent(x), crs = crs)
 }
+#' @export
+#' @name spex
+spex.sfc <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
+    if (missing(crs)) {
+      crs <- crsmeta::crs_proj(x)
+      if (is.na(crs)) {
+        crs <- crsmeta::crs_input(x)
+      }
+    }
+    spex(extent(attr(x, "bbox")[c("xmin", "xmax", "ymin", "ymax")]), crs = crs)
+  }
 
 #' Axis ranges from extent
 #'

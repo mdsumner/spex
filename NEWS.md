@@ -1,5 +1,7 @@
 # spex dev
 
+* Added sfc method, and now using crsmeta. 
+
 * Ensure projargs is character, not logical. 
 
 # spex 0.6.0

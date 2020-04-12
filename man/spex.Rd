@@ -4,6 +4,7 @@
 \alias{spex}
 \alias{spex.default}
 \alias{spex.sf}
+\alias{spex.sfc}
 \title{Polygon extent}
 \usage{
 spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
@@ -11,6 +12,8 @@ spex(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 \method{spex}{default}(x, crs = NULL, byid = FALSE, .id, ..., clipboard = FALSE)
 
 \method{spex}{sf}(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
+
+\method{spex}{sfc}(x, crs, byid = FALSE, .id, ..., clipboard = FALSE)
 }
 \arguments{
 \item{x}{any object with a \code{\link[raster]{Extent}}}
