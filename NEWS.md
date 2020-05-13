@@ -1,5 +1,7 @@
 # spex dev
 
+* Fixed tests. 
+
 * Added sfc method, and now using crsmeta. 
 
 * Ensure projargs is character, not logical. 
