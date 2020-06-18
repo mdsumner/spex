@@ -1,4 +1,4 @@
-# spex dev
+# spex 0.7.0
 
 * Fixed tests. 
 

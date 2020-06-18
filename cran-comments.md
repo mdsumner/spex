@@ -1,6 +1,10 @@
+## spex 0.7.0
+
+* Fixes errors on CRAN due to lib upgrades. 
+
+
 ## Test environments
 
-* Travis ubuntu 14.04 (release)
 * local ubuntu (release)
 * winbuilder (devel)
 
