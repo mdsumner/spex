@@ -5,7 +5,7 @@
 \alias{lux}
 \title{The 'lux' Spatial Polygons from the 'raster' package.}
 \format{
-\code{\link[sp]{SpatialPolygonsDataFrame}} with columns:
+\code{\link[sp]{SpatialPolygonsDataFrame-class}} with columns:
 \itemize{
 \item ID_1
 \item NAME_1

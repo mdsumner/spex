@@ -36,7 +36,7 @@ parse_leaf_extent <- function(x) {
 #' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
 #' \item coerce the Extent to \code{\link[sp]{SpatialPolygons}}
 #' \item restore the 'CRS', the "coordinate reference system", i.e. projection metadata
-#' \item elevate the object to be a \code{\link[sp]{SpatialPolygonsDataFrame}}.
+#' \item elevate the object to be a \code{\link[sp]{SpatialPolygonsDataFrame-class}}.
 #' }
 #'
 #' In short, this pattern exists because there is no projection metadata stored

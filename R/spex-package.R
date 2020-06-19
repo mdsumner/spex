@@ -26,7 +26,7 @@ NULL
 #' The 'lux' Spatial Polygons from the 'raster' package.
 #'
 #' @name lux
-#' @format \code{\link[sp]{SpatialPolygonsDataFrame}} with columns:
+#' @format \code{\link[sp]{SpatialPolygonsDataFrame-class}} with columns:
 #' \itemize{
 #'  \item ID_1
 #'  \item NAME_1
