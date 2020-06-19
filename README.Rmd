@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/spex)](https://cran.r-project.org/package=spex)
+[![R build status](https://github.com/mdsumner/spex/workflows/R-CMD-check/badge.svg)](https://github.com/mdsumner/spex/actions)
 <!-- badges: end -->
   
 ## spex
@@ -110,7 +111,7 @@ There are convenience functions for sf objects.
 class(psf)
 extent(psf)
 spex(psf)
-spex(sf::st_set_crs(psf, 3031))
+
 ```
 
 

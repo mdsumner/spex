@@ -14,6 +14,8 @@ status](https://codecov.io/gh/mdsumner/spex/branch/master/graph/badge.svg)](http
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/spex)](https://cran.r-project.org/package=spex)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/spex)](https://cran.r-project.org/package=spex)
+[![R build
+status](https://github.com/mdsumner/spex/workflows/R-CMD-check/badge.svg)](https://github.com/mdsumner/spex/actions)
 <!-- badges: end -->
 
 ## spex
@@ -66,7 +68,8 @@ data(lux)
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)
-#> crs         : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+#> Warning in proj4string(x): CRS object has comment, which is lost in output
+#> crs         : +proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs 
 #> variables   : 1
 #> names       : SpatialPolygonsDataFrame_extent 
 #> value       :                               1
@@ -76,7 +79,8 @@ spex(extent(0, 1, 0, 1), crs = "+proj=laea +ellps=WGS84")
 #> class       : SpatialPolygonsDataFrame 
 #> features    : 1 
 #> extent      : 0, 1, 0, 1  (xmin, xmax, ymin, ymax)
-#> crs         : +proj=laea +ellps=WGS84 
+#> Warning in proj4string(x): CRS object has comment, which is lost in output
+#> crs         : +proj=laea +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs 
 #> variables   : 1
 #> names       : Extent_extent 
 #> value       :             1
@@ -112,7 +116,7 @@ class(p$geometry)
 
 print(tm)
 #>    user  system elapsed 
-#>   0.291   0.016   0.308
+#>   0.386   0.004   0.390
 ```
 
 Create a buffered extent with whole-number aligned edges.
@@ -158,14 +162,6 @@ spex(psf)
 #> features    : 1 
 #> extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)
 #> crs         : NA 
-#> variables   : 1
-#> names       : Extent_extent 
-#> value       :             1
-spex(sf::st_set_crs(psf, 3031))
-#> class       : SpatialPolygonsDataFrame 
-#> features    : 1 
-#> extent      : 0, 1.23, 0, 1  (xmin, xmax, ymin, ymax)
-#> crs         : +proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 #> variables   : 1
 #> names       : Extent_extent 
 #> value       :             1
