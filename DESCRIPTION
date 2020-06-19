@@ -29,4 +29,3 @@ Suggests:
     testthat (>= 2.1.0)
 ByteCompile: TRUE
 Roxygen: list(markdown = TRUE)
-Remotes: hypertidy/reproj
