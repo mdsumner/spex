@@ -1,4 +1,6 @@
-## spex 0.7.0
+## spex 0.7.1
+
+* Resubmit 0.7.1 as 0.7.0 with file-anchored links to raster Extent-class. 
 
 * Fixes errors on CRAN due to lib upgrades. 
 

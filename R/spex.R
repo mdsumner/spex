@@ -33,16 +33,16 @@ parse_leaf_extent <- function(x) {
 #'
 #' This function is to replace a common pattern in spatial packages which is
 #' \itemize{
-#' \item create an \code{\link[raster]{Extent}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
+#' \item create an \code{\link[raster]{Extent-class}}, a bounding box in xmin,xmax,ymin,ymax but without projection metadata
 #' \item coerce the Extent to \code{\link[sp]{SpatialPolygons}}
 #' \item restore the 'CRS', the "coordinate reference system", i.e. projection metadata
 #' \item elevate the object to be a \code{\link[sp]{SpatialPolygonsDataFrame-class}}.
 #' }
 #'
 #' In short, this pattern exists because there is no projection metadata stored
-#'  with either sp's \code{\link[sp]{bbox}} or raster's \code{\link[raster]{Extent}}.
+#'  with either sp's \code{\link[sp]{bbox}} or raster's \code{\link[raster]{Extent-class}}.
 #'
-#' @param x any object with a \code{\link[raster]{Extent}}
+#' @param x any object with a \code{\link[raster]{Extent-class}}
 #' @param byid return a separate object for every input sub-object (not yet implemented)
 #' @param .id optional name for output attribute name
 #' @param ... arguments for methods
