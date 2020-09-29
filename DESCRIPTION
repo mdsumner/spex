@@ -1,7 +1,7 @@
 Package: spex
 Type: Package
 Title: Spatial Extent Tools
-Version: 0.7.1
+Version: 0.7.1.9001
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email =
     "mdsumner@gmail.com")
 Description: Functions to produce a fully fledged 'geo-spatial' object extent as a
@@ -21,7 +21,7 @@ Imports:
     sp,
     stats,
     crsmeta
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1
 URL: https://mdsumner.github.io/spex/
 BugReports: https://github.com/mdsumner/spex/issues
 Suggests: 

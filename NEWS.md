@@ -1,3 +1,8 @@
+# spex dev
+
+* Catch case for `spex.sf()` where no proj string is available, get the WKT as a comment. 
+
+
 # spex 0.7.1
 
 * Fixed tests. 

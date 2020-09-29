@@ -133,26 +133,33 @@ extent_sf <- function(x, ...) {
 setOldClass("sf")
 setMethod(f = "extent", signature = "sf", definition = extent_sf)
 
+.sf_spCRS <- function(x) {
+  crs <- crsmeta::crs_proj(x)
+  if (is.na(crs)) {
+    crs <- crsmeta::crs_input(x)
+    if (is.na(crs) || !(grepl("^\\+proj", crs) || grepl("^\\+init", crs))) {
+      crs <- crsmeta::crs_wkt(x)
+      ## we ended up with wkt, so 
+      if (is.na(crs)) crs <- NULL
+      crs <- sp::CRS(NA_character_, SRS_string = crs, doCheckCRSArgs = FALSE)
+    }
+  }
+  crs
+}
 #' @export
 #' @name spex
 spex.sf <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
   if (missing(crs)) {
-    crs <- crsmeta::crs_proj(x)
-    if (is.na(crs)) {
-      crs <- crsmeta::crs_input(x)
-    }
+    crs <- .sf_spCRS(x)
   }
-  spex(extent(x), crs = crs)
+  spex(x[[attr(x, "sf_column")]], crs = crs)
 }
 #' @export
 #' @name spex
 spex.sfc <- function(x, crs, byid = FALSE, .id, ..., clipboard = FALSE) {
-    if (missing(crs)) {
-      crs <- crsmeta::crs_proj(x)
-      if (is.na(crs)) {
-        crs <- crsmeta::crs_input(x)
-      }
-    }
+  if (missing(crs)) {
+    crs <- .sf_spCRS(x)
+  }
     spex(extent(attr(x, "bbox")[c("xmin", "xmax", "ymin", "ymax")]), crs = crs)
   }
 
